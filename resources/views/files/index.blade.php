@@ -16,7 +16,7 @@
                                 <th>Size</th>
                                 @foreach ($files as $file)
                                     <tr>
-                                        <td>{{ $file->filename }}</td>
+                                        <td><a href="{{ url('files/'.$file->path.'/'.$file->filename) }}">{{ $file->filename }}</a></td>
                                         <td>{{ $file->size }} Bytes</td>
                                     </tr>
                                 @endforeach
