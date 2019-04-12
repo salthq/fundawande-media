@@ -15,7 +15,7 @@ class FileEntriesController extends Controller
             $input['filename'] = $filename;
             $input['mime'] = $file->getClientMimieType();
             $input['size'] = $file->getClientSize();
-            $file = FileEntry::create($input);
+            $file = \App\FileEntry::create($input);
 
             return response()->json([
                 'success' => true,
@@ -26,5 +26,10 @@ class FileEntriesController extends Controller
         return response()->json([
             'success' => false
         ], 500);
+    }
+
+    public function index() {
+        $files = \App\FileEntry::all();
+        return view('files.index', ['files' => $files]);
     }
 }
