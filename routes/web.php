@@ -34,3 +34,6 @@ Auth::routes();
 
 // Resource Routes
 Route::resource('/resources', 'ResourcesController');
+
+//Download Resource
+Route::get('/resources/{resource}', 'ResourcesController@download');

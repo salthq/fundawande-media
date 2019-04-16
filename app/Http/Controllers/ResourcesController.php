@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Resource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class ResourcesController extends Controller
 {
@@ -97,7 +99,19 @@ class ResourcesController extends Controller
     public function destroy(Resource $resource)
     {
         $resource->delete();
+        Storage::disk('public')->delete('resources/' .$resource->filename);
 
         return redirect('/resources');
+    }
+
+     /**
+     * Download the specified resource
+     *
+     * @param  \App\Resource  $resource
+     * @return \Illuminate\Http\Response
+     */
+    public function download(Resource $resource)
+    {
+        return Storage::disk('public')->download('resources/' .$resource->filename);
     }
 }

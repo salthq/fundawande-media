@@ -31,12 +31,19 @@
                                         <td>{{ $resource->filename }}</td>
                                         <td>{{ $resource->size }} Bytes</td>
                                         <td>
-                                            <form method="POST" action="/resources/{{$resource->id}}">
-                                                {{method_field('DELETE')}}
-                                                @csrf
+                                            <div class="btn-group" role="group" aria-label="Resource Actions">
+                                                <form method="POST" action="/resources/{{$resource->id}}">
+                                                    {{method_field('DELETE')}}
+                                                    @csrf
 
-                                                <button class="btn btn-danger" type="submit">Delete</button>
-                                            </form>
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
+                                                <form method="GET" action="/resources/{{$resource->id}}">
+                                                    @csrf
+
+                                                    <button class="btn btn-info text-white" type="submit">Download</button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach
