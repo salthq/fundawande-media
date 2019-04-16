@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h1 class="m-0">Resources</h1>
@@ -12,18 +12,26 @@
                     <div class="card-body">
                         @if ($resources->count())
                             <table class="table">
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Resource Name</th>
-                                <th>Size</th>
-                                @foreach ($resources as $resource)
+                                <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Resource Name</th>
+                                        <th scope="col">Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($resources as $resource)
+                                    <tr>
+                                        <td scope="row">{{ $loop->index }}</td>
                                         <td>{{ $resource->title }}</td>
-                                        <td>{{ $resource->description }}</td>
+                                        <td>{{ $resource->mime }}</td>
                                         <td>{{ $resource->filename }}</td>
                                         <td>{{ $resource->size }} Bytes</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
+                                </tbody>
                             </table>
                         @else
                             You have no resources yet!

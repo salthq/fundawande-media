@@ -8,7 +8,7 @@
       </p>
     </div>
 
-    <form method="POST" action="/resources" v-show="resources.length > 0">
+    <form id="form" @submit.prevent="submit" v-show="resources.length > 0">
       <!-- Slot for CSRF token -->
       <slot></slot>
       <div
@@ -29,15 +29,21 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <div class="my-3 alert alert-success" role="alert" v-show="uploadSuccess">
+      <p class="m-0">
+        Success!
+        <a class="alert-link" href="/resources">View resources?</a>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["post_url"],
   data() {
     return {
-      resources: []
+      resources: [],
+      uploadSuccess: false
     };
   },
   methods: {
@@ -50,6 +56,30 @@ export default {
     },
     removeResource(key) {
       this.resources.splice(key, 1);
+    },
+    submit() {
+      for (let i = 0; i < this.resources.length; i++) {
+        if (this.resources[i].id) {
+          continue;
+        }
+        let form = document.getElementById("form");
+        let formData = new FormData(form);
+        formData.append("file", this.resources[i]);
+
+        axios
+          .post("/resources", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(data => {
+            this.uploadSuccess = true;
+            this.resources = [];
+          })
+          .catch(function(data) {
+            console.log(data.response);
+          });
+      }
     }
   }
 };

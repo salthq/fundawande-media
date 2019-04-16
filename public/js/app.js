@@ -1797,11 +1797,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["post_url"],
   data: function data() {
     return {
-      resources: []
+      resources: [],
+      uploadSuccess: false
     };
   },
   methods: {
@@ -1814,6 +1820,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeResource: function removeResource(key) {
       this.resources.splice(key, 1);
+    },
+    submit: function submit() {
+      var _this = this;
+
+      for (var i = 0; i < this.resources.length; i++) {
+        if (this.resources[i].id) {
+          continue;
+        }
+
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+        formData.append("file", this.resources[i]);
+        axios.post("/resources", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }).then(function (data) {
+          _this.uploadSuccess = true;
+          _this.resources = [];
+        })["catch"](function (data) {
+          console.log(data.response);
+        });
+      }
     }
   }
 });
@@ -37780,7 +37809,13 @@ var render = function() {
             expression: "resources.length > 0"
           }
         ],
-        attrs: { method: "POST", action: "/resources" }
+        attrs: { id: "form" },
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
       },
       [
         _vm._t("default"),
@@ -37829,6 +37864,23 @@ var render = function() {
         )
       ],
       2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.uploadSuccess,
+            expression: "uploadSuccess"
+          }
+        ],
+        staticClass: "my-3 alert alert-success",
+        attrs: { role: "alert" }
+      },
+      [_vm._m(1)]
     )
   ])
 }
@@ -37841,6 +37893,17 @@ var staticRenderFns = [
       _vm._v("\n      Drop your files here\n      "),
       _c("br"),
       _vm._v("or click to search\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "m-0" }, [
+      _vm._v("\n      Success!\n      "),
+      _c("a", { staticClass: "alert-link", attrs: { href: "/resources" } }, [
+        _vm._v("View resources?")
+      ])
     ])
   }
 ]

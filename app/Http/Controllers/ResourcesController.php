@@ -36,7 +36,19 @@ class ResourcesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $resource = new Resource;
+        $file = $request->file('file');
+
+
+        $resource->title = $request->title;
+        $resource->mime = $file->getMimeType();
+        $resource->filename = $file->getClientOriginalName();
+        $resource->size = $file->getClientSize();
+
+        $resource->save();
+
+        return redirect('/resources');
     }
 
     /**
