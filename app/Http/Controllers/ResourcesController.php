@@ -48,6 +48,9 @@ class ResourcesController extends Controller
 
         $resource->save();
 
+        $file->storeAs('resources', $resource->filename, 'public');
+
+
         return redirect('/resources');
     }
 
