@@ -1783,6 +1783,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["post_url"],
   data: function data() {
@@ -1800,37 +1814,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeResource: function removeResource(key) {
       this.resources.splice(key, 1);
-      this.getImagePreviews();
-    },
-    submitResources: function submitResources() {
-      var _this = this;
-
-      var _loop = function _loop(i) {
-        if (_this.resources[i].id) {
-          return "continue";
-        }
-
-        var formData = new FormData();
-        formData.append("resource", _this.resources[i]); // If hitting this endpoint fails, we can create a proper uploadResource function in the controller instead.
-
-        axios.post("/resources/", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        }).then(function (data) {
-          this.resources[i].id = data["data"]["id"];
-          this.resources.splice(i, 1, this.resources[i]);
-          console.log("success");
-        }.bind(_this))["catch"](function (data) {
-          console.log(data.response);
-        });
-      };
-
-      for (var i = 0; i < this.resources.length; i++) {
-        var _ret = _loop(i);
-
-        if (_ret === "continue") continue;
-      }
     }
   }
 });
@@ -6294,7 +6277,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-35e2db89] {\n  opacity: 0;\n  width: 100%;\n  height: 200px;\n  position: absolute;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89] {\n  outline: 2px dashed grey;\n  outline-offset: -10px;\n  background: #ccc;\n  color: dimgray;\n  padding: 10px 10px;\n  min-height: 200px;\n  position: relative;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89]:hover {\n  background: #c0c0c0;\n}\n.filezone p[data-v-35e2db89] {\n  font-size: 1.2em;\n  text-align: center;\n  padding: 50px 50px 50px 50px;\n}\ndiv.resource-listing img[data-v-35e2db89] {\n  max-width: 90%;\n}\ndiv.resource-listing[data-v-35e2db89] {\n  margin: auto;\n  padding: 10px;\n  border-bottom: 1px solid #ddd;\n}\ndiv.resource-listing img[data-v-35e2db89] {\n  height: 100px;\n}\ndiv.success-container[data-v-35e2db89] {\n  text-align: center;\n  color: green;\n}\ndiv.remove-container[data-v-35e2db89] {\n  text-align: center;\n}\ndiv.remove-container a[data-v-35e2db89] {\n  color: red;\n  cursor: pointer;\n}\na.submit-button[data-v-35e2db89] {\n  cursor: pointer;\n  display: block;\n  margin: auto;\n  text-align: center;\n  width: 200px;\n  padding: 10px;\n  text-transform: uppercase;\n  background-color: #ccc;\n  color: #fff !important;\n  font-weight: bold;\n  margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-35e2db89] {\n  opacity: 0;\n  width: 100%;\n  height: 200px;\n  position: absolute;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89] {\n  outline: 2px dashed grey;\n  outline-offset: -10px;\n  background: #ccc;\n  color: dimgray;\n  padding: 10px 10px;\n  min-height: 200px;\n  position: relative;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89]:hover {\n  background: #c0c0c0;\n}\n.filezone p[data-v-35e2db89] {\n  font-size: 1.2em;\n  text-align: center;\n  padding: 50px 50px 50px 50px;\n}\ndiv.resource-listing[data-v-35e2db89] {\n  border-bottom: 1px solid #ddd;\n}\n.remove-resource[data-v-35e2db89] {\n  cursor: pointer;\n}\na.submit-button[data-v-35e2db89] {\n  cursor: pointer;\n  display: block;\n  margin: auto;\n  text-align: center;\n  width: 200px;\n  padding: 10px;\n  text-transform: uppercase;\n  background-color: #ccc;\n  color: #fff !important;\n  font-weight: bold;\n  margin-top: 20px;\n}\n", ""]);
 
 // exports
 
@@ -37771,74 +37754,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("div", { staticClass: "large-12 medium-12 small-12 filezone" }, [
-        _c("input", {
-          ref: "files",
-          attrs: { type: "file", id: "files", multiple: "" },
-          on: {
-            change: function($event) {
-              return _vm.handleResources()
-            }
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "large-12 medium-12 small-12 filezone" }, [
+      _c("input", {
+        ref: "files",
+        attrs: { type: "file", id: "files", multiple: "" },
+        on: {
+          change: function($event) {
+            return _vm.handleResources()
           }
-        }),
-        _vm._v(" "),
-        _vm._m(0)
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.resources, function(resource, key) {
-        return _c("div", { key: key, staticClass: "resource-listing" }, [
-          _c("p", { staticClass: "text-center my-3" }, [
-            _vm._v(_vm._s(resource.name))
-          ]),
-          _vm._v(" "),
-          resource.id > 0
-            ? _c("div", { staticClass: "success-container" }, [
-                _vm._v("Success")
-              ])
-            : _c("div", { staticClass: "remove-container" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "remove",
-                    on: {
-                      click: function($event) {
-                        return _vm.removeResource(key)
-                      }
-                    }
-                  },
-                  [_vm._v("Remove")]
-                )
-              ])
-        ])
+        }
       }),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.resources.length > 0,
-              expression: "resources.length > 0"
-            }
-          ],
-          staticClass: "submit-button",
-          on: {
-            click: function($event) {
-              return _vm.submitResources()
-            }
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.resources.length > 0,
+            expression: "resources.length > 0"
           }
-        },
-        [_vm._v("Submit")]
-      )
-    ],
-    2
-  )
+        ],
+        attrs: { method: "POST", action: "/resources" }
+      },
+      [
+        _vm._t("default"),
+        _vm._v(" "),
+        _vm._l(_vm.resources, function(resource, key) {
+          return _c(
+            "div",
+            { key: key, staticClass: "form-group resource-listing my-3" },
+            [
+              _c("label", { attrs: { for: "title" } }, [
+                _vm._v("Resource Title")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control mb-3",
+                attrs: {
+                  type: "text",
+                  name: "title",
+                  placeholder: "Enter title for resource here",
+                  required: ""
+                }
+              }),
+              _vm._v(" "),
+              _c("p", [_vm._v("File name: " + _vm._s(resource.name))]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "remove-resource text-danger pb-2",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeResource(key)
+                    }
+                  }
+                },
+                [_vm._v("Remove Resource")]
+              )
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Submit")]
+        )
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {

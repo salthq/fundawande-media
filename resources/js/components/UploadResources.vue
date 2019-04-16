@@ -7,14 +7,28 @@
         <br>or click to search
       </p>
     </div>
-    <div v-for="(resource, key) in resources" class="resource-listing" v-bind:key="key">
-      <p class="text-center my-3">{{ resource.name }}</p>
-      <div class="success-container" v-if="resource.id > 0">Success</div>
-      <div class="remove-container" v-else>
-        <a class="remove" v-on:click="removeResource(key)">Remove</a>
+
+    <form method="POST" action="/resources" v-show="resources.length > 0">
+      <!-- Slot for CSRF token -->
+      <slot></slot>
+      <div
+        v-for="(resource, key) in resources"
+        class="form-group resource-listing my-3"
+        v-bind:key="key"
+      >
+        <label for="title">Resource Title</label>
+        <input
+          type="text"
+          name="title"
+          class="form-control mb-3"
+          placeholder="Enter title for resource here"
+          required
+        >
+        <p>File name: {{ resource.name }}</p>
+        <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">Remove Resource</a>
       </div>
-    </div>
-    <a class="submit-button" v-on:click="submitResources()" v-show="resources.length > 0">Submit</a>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -36,34 +50,6 @@ export default {
     },
     removeResource(key) {
       this.resources.splice(key, 1);
-      this.getImagePreviews();
-    },
-    submitResources() {
-      for (let i = 0; i < this.resources.length; i++) {
-        if (this.resources[i].id) {
-          continue;
-        }
-        let formData = new FormData();
-        formData.append("resource", this.resources[i]);
-
-        // If hitting this endpoint fails, we can create a proper uploadResource function in the controller instead.
-        axios
-          .post("/resources/", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
-          })
-          .then(
-            function(data) {
-              this.resources[i].id = data["data"]["id"];
-              this.resources.splice(i, 1, this.resources[i]);
-              console.log("success");
-            }.bind(this)
-          )
-          .catch(function(data) {
-            console.log(data.response);
-          });
-      }
     }
   }
 };
@@ -96,30 +82,12 @@ input[type="file"] {
   text-align: center;
   padding: 50px 50px 50px 50px;
 }
-div.resource-listing img {
-  max-width: 90%;
-}
 
 div.resource-listing {
-  margin: auto;
-  padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
-div.resource-listing img {
-  height: 100px;
-}
-div.success-container {
-  text-align: center;
-  color: green;
-}
-
-div.remove-container {
-  text-align: center;
-}
-
-div.remove-container a {
-  color: red;
+.remove-resource {
   cursor: pointer;
 }
 

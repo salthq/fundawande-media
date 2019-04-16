@@ -7,7 +7,9 @@
                 <div class="card-header">
                     <h2>Add Resources</h2>
                     <div class="card-body">
-                        <upload-resources post_url="resources/"></upload-resources>
+                        <upload-resources post_url="resources/">
+                            {{ csrf_field() }}
+                        </upload-resources>
                     </div>
                 </div>
             </div>
