@@ -93,6 +93,8 @@ class ResourcesController extends Controller
      */
     public function destroy(Resource $resource)
     {
-        //
+        $resource->delete();
+
+        return redirect('/resources');
     }
 }

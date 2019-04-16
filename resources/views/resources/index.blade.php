@@ -19,6 +19,7 @@
                                         <th scope="col">Type</th>
                                         <th scope="col">Resource Name</th>
                                         <th scope="col">Size</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,6 +30,14 @@
                                         <td>{{ $resource->mime }}</td>
                                         <td>{{ $resource->filename }}</td>
                                         <td>{{ $resource->size }} Bytes</td>
+                                        <td>
+                                            <form method="POST" action="/resources/{{$resource->id}}">
+                                                {{method_field('DELETE')}}
+                                                @csrf
+
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
