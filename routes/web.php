@@ -22,7 +22,7 @@ Route::get('/home', function () {
 Auth::routes();
 
 // Resource Routes
-Route::resource('/resources', 'ResourcesController');
+Route::resource('/resources', 'ResourcesController')->middleware('auth');
 
 //Download Resource
 Route::get('/resources/{resource}', 'ResourcesController@download');
