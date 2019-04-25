@@ -25,7 +25,7 @@
                                 <tbody>
                                     @foreach ($resources as $resource)
                                     <tr>
-                                        <td scope="row">{{ $loop->index }}</td>
+                                        <td scope="row">{{ $loop->index + 1 }}</td>
                                         <td>{{ $resource->title }}</td>
                                         <td>{{ $resource->mime }}</td>
                                         <td>{{ $resource->filename }}</td>
