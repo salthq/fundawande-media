@@ -1,0 +1,85 @@
+// Utilities
+@import 'utilities';
+
+// Variables
+@import 'variables';
+
+
+/* ==========================================================================
+* App Global styling
+*
+* Define all global styling classes used in the app
+*
+ ========================================================================== */
+
+
+/*
+ * Typography
+ */
+
+ html {
+
+
+    @include breakpoint(tablet) {
+      font-size: 19px;
+    }
+
+    @include breakpoint(phone) {
+      font-size: 13px;
+    }
+  }
+
+  body {
+    color: $text-primary__colour;
+    font-family: $base__font-family;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.45;
+    opacity: 1;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: $text-primary__colour;
+      font-family: $base-header__font-family;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.15;
+      opacity: 100%;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2.488em;
+    }
+
+    h2 {
+      font-size: 2.074em;
+    }
+
+    h3 {
+      font-size: 1.728em;
+    }
+
+    h4 {
+      font-size: 1.44em;
+    }
+
+    h5 {
+      font-size: 1.2em;
+    }
+
+    hr {
+      height: 2px;
+      color: #cccccc;
+      opacity: 0.5;
+    }
+
+    p {
+      @include breakpoint(phone) {
+        font-size: 1.25em;
+      }
+    }
+  }

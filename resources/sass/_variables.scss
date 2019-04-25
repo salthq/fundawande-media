@@ -2,10 +2,11 @@
 // Body
 $body-bg: #f8fafc;
 
-// Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+//FW Color Variables
+$brand-primary__colour: #EF9D19;
+$brand-secondary__colour: #231F20;
+$text-primary__colour : #4A4A4A;
+
 
 // Colors
 $blue: #3490dc;
@@ -18,3 +19,77 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+// #  Typography
+
+// Roboto Condensed
+@font-face {
+    font-family: 'Roboto';
+    src: url("/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"),
+         url("/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  // Roboto Bold
+  @font-face {
+    font-family: 'Roboto';
+    src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"),
+         url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  // Roboto Italic
+  @font-face {
+    font-family: 'Roboto';
+    src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"),
+         url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  // Roboto Bold Italic
+  @font-face {
+    font-family: 'Roboto';
+    src: url("/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff"),
+         url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  //Rubik Regular
+  @font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/Rubik/Rubik-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  //Rubik Bold
+  @font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  //Rubik Italic
+  @font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/Rubik/Rubik-Italic.ttf') format("truetype");
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  //Rubik Bold Italic
+  @font-face {
+    font-family: 'Rubik';
+    src: url('/fonts/Rubik/Rubik-BoldItalic.ttf') format("truetype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  // Base typography
+$base__font-family : "Roboto", Tahoma, sans‑serif;
+$base-header__font-family : "Rubik", Verdana, Geneva, sans-serif;
