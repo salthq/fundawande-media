@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         @if ($resources->count())
-                            <resource-table :resources="{{ $resources }} ">
+                            <resource-table :resource_array="{{ $resources }} ">
                                     {{method_field('DELETE')}}
                                     @csrf
                             </resource-table>

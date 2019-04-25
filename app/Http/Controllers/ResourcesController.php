@@ -46,6 +46,7 @@ class ResourcesController extends Controller
         $resource->title = $request->title;
         $resource->mime = $file->getMimeType();
         $resource->filename = $file->getClientOriginalName();
+        //TODO: Save the size in a human-readable format
         $resource->size = $file->getClientSize();
 
         $resource->save();
