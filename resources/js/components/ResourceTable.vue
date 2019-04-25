@@ -32,10 +32,15 @@
                   <i class="fas fa-download"></i>
                 </button>
               </form>
-              <button class="btn btn-primary text-white" type="submit">
+              <button
+                class="btn btn-primary text-white"
+                type="button"
+                @click="copyFileName(resource.id)"
+              >
                 <i class="fas fa-copy"></i>
               </button>
             </div>
+            <input type="hidden" :id="'resource' + resource.id" :value="resource.filename">
           </td>
         </tr>
       </tbody>
@@ -54,6 +59,22 @@ export default {
     };
   },
   methods: {
+    copyFileName(id) {
+      let fileNameToCopy = document.querySelector("#resource" + id);
+      fileNameToCopy.setAttribute("type", "text");
+      fileNameToCopy.select();
+
+      try {
+        var successful = document.execCommand("copy");
+        alert("File Name was successfully copied");
+      } catch (err) {
+        alert("Oops, unable to copy");
+      }
+
+      /* unselect the range */
+      fileNameToCopy.setAttribute("type", "hidden");
+      window.getSelection().removeAllRanges();
+    },
     sortTable: function sortTable(col) {
       if (this.sortColumn === col) {
         this.ascending = !this.ascending;

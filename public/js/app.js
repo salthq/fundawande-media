@@ -1808,6 +1808,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["resource_array"],
   data: function data() {
@@ -1818,6 +1823,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    copyFileName: function copyFileName(id) {
+      var fileNameToCopy = document.querySelector("#resource" + id);
+      fileNameToCopy.setAttribute("type", "text");
+      fileNameToCopy.select();
+
+      try {
+        var successful = document.execCommand("copy");
+        alert("File Name was successfully copied");
+      } catch (err) {
+        alert("Oops, unable to copy");
+      }
+      /* unselect the range */
+
+
+      fileNameToCopy.setAttribute("type", "hidden");
+      window.getSelection().removeAllRanges();
+    },
     sortTable: function sortTable(col) {
       if (this.sortColumn === col) {
         this.ascending = !this.ascending;
@@ -38011,9 +38033,26 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _vm._m(2, true)
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary text-white",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.copyFileName(resource.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-copy" })]
+                    )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "hidden", id: "resource" + resource.id },
+                  domProps: { value: resource.filename }
+                })
               ])
             ],
             2
@@ -38043,16 +38082,6 @@ var staticRenderFns = [
       "button",
       { staticClass: "btn btn-info text-white", attrs: { type: "submit" } },
       [_c("i", { staticClass: "fas fa-download" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary text-white", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "fas fa-copy" })]
     )
   }
 ]
