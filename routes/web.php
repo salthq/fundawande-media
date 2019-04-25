@@ -17,21 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::group(['middleware' => 'auth'], function() {
-//     Route::get('files', 'FileEntriesController@index');
-// });
-// Route::get('files/create', 'FileEntriesController@create');
-// Route::post('files/upload-file', 'FileEntriesController@uploadFile');
-
-// Route::get('files/{path_file}/{file}', function($path_file = null, $file = null) {
-//     $path = storage_path().'/files/uploads/'.$path_file.'/'.$file;
-//     if(file_exists($path)) {
-//         return Response::download($path);
-//     }
-// });
-
 // Resource Routes
 Route::resource('/resources', 'ResourcesController');
 
