@@ -6,8 +6,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h1 class="m-0">Resources</h1>
-                        <a href="{{url('/resources/create')}}" class="btn btn-info text-white">Add resource</a>
+                        <h3 class="m-0">Resources</h3>
+                        <a href="{{url('/resources/create')}}" class="btn primary-btn-fill">Add resource</a>
                     </div>
                     <div class="card-body">
                         @if ($resources->count())

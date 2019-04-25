@@ -1,9 +1,8 @@
 // Utilities
-@import 'utilities';
+@import "utilities";
 
 // Variables
-@import 'variables';
-
+@import "variables";
 
 /* ==========================================================================
 * App Global styling
@@ -12,24 +11,21 @@
 *
  ========================================================================== */
 
-
 /*
  * Typography
  */
 
- html {
-
-
+html {
     @include breakpoint(tablet) {
-      font-size: 19px;
+        font-size: 19px;
     }
 
     @include breakpoint(phone) {
-      font-size: 13px;
+        font-size: 13px;
     }
-  }
+}
 
-  body {
+body {
     color: $text-primary__colour;
     font-family: $base__font-family;
     font-style: normal;
@@ -42,44 +38,170 @@
     h3,
     h4,
     h5 {
-      color: $text-primary__colour;
-      font-family: $base-header__font-family;
-      font-style: normal;
-      font-weight: normal;
-      line-height: 1.15;
-      opacity: 100%;
+        color: $text-primary__colour;
+        font-family: $base-header__font-family;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.15;
+        opacity: 100%;
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 2.488em;
+        margin-top: 0;
+        font-size: 2.488em;
     }
 
     h2 {
-      font-size: 2.074em;
+        font-size: 2.074em;
     }
 
     h3 {
-      font-size: 1.728em;
+        font-size: 1.728em;
     }
 
     h4 {
-      font-size: 1.44em;
+        font-size: 1.44em;
     }
 
     h5 {
-      font-size: 1.2em;
+        font-size: 1.2em;
     }
 
     hr {
-      height: 2px;
-      color: #cccccc;
-      opacity: 0.5;
+        height: 2px;
+        color: #cccccc;
+        opacity: 0.5;
     }
 
     p {
-      @include breakpoint(phone) {
-        font-size: 1.25em;
-      }
+        @include breakpoint(phone) {
+            font-size: 1.25em;
+        }
     }
-  }
+}
+
+// Brand Styling
+
+.primary-bg {
+    background-color: $brand-primary__colour !important;
+}
+.primary-text {
+    color: $brand-primary__colour !important;
+}
+.primary-border {
+    border-color: $brand-primary__colour !important;
+}
+.primary-btn-outline {
+    border-color: $brand-primary__colour !important;
+    color: $brand-primary__colour !important;
+    border: 1px solid !important;
+    svg {
+        fill: $brand-primary__colour !important;
+    }
+    &:hover {
+        border-color: $brand-primary__colour !important;
+        background-color: $brand-primary__colour !important;
+        color: $white !important;
+        text-decoration: none !important;
+        svg {
+            fill: $white !important;
+        }
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.1rem $brand-primary__colour !important;
+        outline-color: $brand-primary__colour !important;
+    }
+}
+.primary-btn-fill {
+    background-color: $brand-primary__colour !important;
+    border-color: $brand-primary__colour !important;
+    color: $white !important;
+    svg {
+        fill: $white !important;
+    }
+    &:hover {
+        @extend .primary-btn-fill;
+        opacity: 0.8 !important;
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.1rem $brand-primary__colour !important;
+        outline-color: $brand-primary__colour !important;
+    }
+}
+.primary-svg-fill {
+    svg {
+        fill: $brand-primary__colour !important;
+    }
+}
+.primary-svg-stroke {
+    svg {
+        stroke: $brand-primary__colour !important;
+    }
+}
+//This class is used to fill in the circle around icon SVGs
+.primary-svg-icon-fill {
+    svg {
+        circle {
+            fill: $brand-primary__colour !important;
+        }
+    }
+}
+
+/*
+   * Button Styling
+   */
+
+.button-text-width-limit {
+    max-width: 100px !important;
+}
+
+.button-primary {
+    border: 1.5px solid !important;
+    border-color: $grey-secondary !important;
+    border-radius: 4px;
+    color: white;
+    background-color: $grey-secondary !important;
+    font-weight: 500 !important;
+    line-height: 15px;
+    text-align: center !important;
+    padding: 5px !important;
+    display: inline-block !important;
+    &:hover {
+        opacity: 0.7 !important;
+        text-decoration: none !important;
+    }
+}
+
+.button-secondary {
+    border: 1.5px solid !important;
+    border-color: $grey-secondary !important;
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    line-height: 15px !important;
+    text-align: center !important;
+    padding: 5px !important;
+    display: inline-block !important;
+    &:hover {
+        opacity: 0.7 !important;
+        text-decoration: none !important;
+    }
+    &.collapsed {
+        svg {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.button-tertiary {
+    border-color: $grey-tertiary !important;
+    background-color: $white !important;
+    color: $grey-tertiary !important;
+    &-active {
+        background-color: $grey-tertiary !important;
+        color: $white !important;
+    }
+}
