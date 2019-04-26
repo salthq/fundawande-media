@@ -3,7 +3,14 @@
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th class="px-2" v-for="(col, key) in columns" :key="key" @click="sortTable(col)">
+          <th scope="col">#</th>
+          <th
+            scope="col"
+            class="px-2"
+            v-for="(col, key) in columns"
+            :key="key"
+            @click="sortTable(col)"
+          >
             {{ col }}
             <span v-if="sortColumn == col && ascending == true" class="px-2">
               <i class="fas fa-sort-up"></i>
@@ -17,16 +24,17 @@
       </thead>
       <tbody>
         <tr v-for="(resource, index, key) in resources" v-bind:key="key">
+          <td scope="row">{{ index }}</td>
           <td v-for="(col, key) in columns" :key="key">{{ resource[col] }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Resource Actions">
-              <form method="POST" :action="'/resources/' + resource.id">
+              <form method="POST" :action="'/resources/' + resource.ID">
                 <slot></slot>
                 <button class="btn btn-danger" type="submit">
                   <i class="fas fa-trash"></i>
                 </button>
               </form>
-              <form method="GET" :action="'/resources/' + resource.id">
+              <form method="GET" :action="'/resources/' + resource.ID">
                 <slot></slot>
                 <button class="btn btn-info text-white" type="submit">
                   <i class="fas fa-download"></i>
@@ -35,12 +43,12 @@
               <button
                 class="btn btn-primary text-white"
                 type="button"
-                @click="copyFileName(resource.id)"
+                @click="copyFileName(resource.ID)"
               >
                 <i class="fas fa-copy"></i>
               </button>
             </div>
-            <input type="hidden" :id="'resource' + resource.id" :value="resource.filename">
+            <input type="hidden" :id="'resource' + resource.ID" :value="resource.Filename">
           </td>
         </tr>
       </tbody>

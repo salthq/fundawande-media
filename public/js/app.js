@@ -1813,6 +1813,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["resource_array"],
   data: function data() {
@@ -37957,12 +37965,15 @@ var render = function() {
         _c(
           "tr",
           [
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+            _vm._v(" "),
             _vm._l(_vm.columns, function(col, key) {
               return _c(
                 "th",
                 {
                   key: key,
                   staticClass: "px-2",
+                  attrs: { scope: "col" },
                   on: {
                     click: function($event) {
                       return _vm.sortTable(col)
@@ -37997,6 +38008,8 @@ var render = function() {
             "tr",
             { key: key },
             [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v(_vm._s(index))]),
+              _vm._v(" "),
               _vm._l(_vm.columns, function(col, key) {
                 return _c("td", { key: key }, [_vm._v(_vm._s(resource[col]))])
               }),
@@ -38014,7 +38027,7 @@ var render = function() {
                       {
                         attrs: {
                           method: "POST",
-                          action: "/resources/" + resource.id
+                          action: "/resources/" + resource.ID
                         }
                       },
                       [_vm._t("default"), _vm._v(" "), _vm._m(0, true)],
@@ -38026,7 +38039,7 @@ var render = function() {
                       {
                         attrs: {
                           method: "GET",
-                          action: "/resources/" + resource.id
+                          action: "/resources/" + resource.ID
                         }
                       },
                       [_vm._t("default"), _vm._v(" "), _vm._m(1, true)],
@@ -38040,7 +38053,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.copyFileName(resource.id)
+                            return _vm.copyFileName(resource.ID)
                           }
                         }
                       },
@@ -38050,8 +38063,8 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("input", {
-                  attrs: { type: "hidden", id: "resource" + resource.id },
-                  domProps: { value: resource.filename }
+                  attrs: { type: "hidden", id: "resource" + resource.ID },
+                  domProps: { value: resource.Filename }
                 })
               ])
             ],
