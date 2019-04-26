@@ -26,7 +26,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md fw-navbar">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Funda Wande Media') }}
                 </a>

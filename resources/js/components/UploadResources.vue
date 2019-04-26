@@ -25,6 +25,7 @@
           required
         >
         <p>File name: {{ resource.name }}</p>
+        <progress class="w-100" max="100" :value.prop="uploadPercentage"></progress>
         <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">Remove Resource</a>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -43,7 +44,8 @@ export default {
   data() {
     return {
       resources: [],
-      uploadSuccess: false
+      uploadSuccess: false,
+      uploadPercentage: 0
     };
   },
   methods: {
@@ -70,7 +72,12 @@ export default {
           .post("/resources", formData, {
             headers: {
               "Content-Type": "multipart/form-data"
-            }
+            },
+            onUploadProgress: function(progressEvent) {
+              this.uploadPercentage = parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              );
+            }.bind(this)
           })
           .then(data => {
             this.uploadSuccess = true;

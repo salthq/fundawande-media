@@ -1930,11 +1930,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       resources: [],
-      uploadSuccess: false
+      uploadSuccess: false,
+      uploadPercentage: 0
     };
   },
   methods: {
@@ -1962,7 +1964,10 @@ __webpack_require__.r(__webpack_exports__);
         axios.post("/resources", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
-          }
+          },
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(Math.round(progressEvent.loaded * 100 / progressEvent.total));
+          }.bind(this)
         }).then(function (data) {
           _this.uploadSuccess = true;
           _this.resources = [];
@@ -38176,6 +38181,12 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("p", [_vm._v("File name: " + _vm._s(resource.name))]),
+              _vm._v(" "),
+              _c("progress", {
+                staticClass: "w-100",
+                attrs: { max: "100" },
+                domProps: { value: _vm.uploadPercentage }
+              }),
               _vm._v(" "),
               _c(
                 "a",

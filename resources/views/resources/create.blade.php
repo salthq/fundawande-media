@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="card">
                 <div class="card-header">
-                    <h2>Add Resources</h2>
+                    <h2 class="text-center">Add Resources</h2>
                     <div class="card-body">
                         <upload-resources>
                             {{ csrf_field() }}

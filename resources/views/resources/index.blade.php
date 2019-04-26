@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
@@ -20,8 +20,8 @@
                                     $filtered_resource = new stdClass();
                                     $filtered_resource->Title = $resource->title;
                                     $filtered_resource->Filename = $resource->filename;
+                                    $filtered_resource->Size = Fundawande::bytesToHuman($resource->size);
                                     $filtered_resource->Mime = $resource->mime;
-                                    $filtered_resource->Size = $resource->size;
                                     $filtered_resource->ID = $resource->id;
                                     $filtered_resource->Created = $resource->created_at->format('Y-m-d');
 
