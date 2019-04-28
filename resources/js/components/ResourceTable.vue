@@ -1,124 +1,90 @@
 <template>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th
-            scope="col"
-            class="px-2"
-            v-for="(col, key) in columns"
-            :key="key"
-            @click="sortTable(col)"
-          >
-            {{ col }}
-            <span v-if="sortColumn == col && ascending == true" class="px-2">
-              <i class="fas fa-sort-up"></i>
-            </span>
-            <span v-else-if="sortColumn == col && ascending == false" class="px-2">
-              <i class="fas fa-sort-down"></i>
-            </span>
-          </th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(resource, index, key) in resources" v-bind:key="key">
-          <td scope="row">{{ index }}</td>
-          <td v-for="(col, key) in columns" :key="key">{{ resource[col] }}</td>
-          <td>
-            <div class="btn-group" role="group" aria-label="Resource Actions">
-              <form method="POST" :action="'/resources/' + resource.ID">
-                <slot></slot>
-                <button class="btn btn-danger" type="submit">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </form>
-              <form method="GET" :action="'/resources/' + resource.ID">
-                <slot></slot>
-                <button class="btn btn-info text-white" type="submit">
-                  <i class="fas fa-download"></i>
-                </button>
-              </form>
-              <button
-                class="btn btn-primary text-white"
-                type="button"
-                @click="copyFileName(resource.ID)"
-              >
-                <i class="fas fa-copy"></i>
-              </button>
-            </div>
-            <input type="hidden" :id="'resource' + resource.ID" :value="resource.Filename">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <b-container fluid class="my-3">
+      <b-row class="justify-content-end">
+        <b-card no-body class="py-2 d-flex justify-content-end">
+          <b-col md="12">
+            <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
+              <b-input-group>
+                <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
+                <b-input-group-append>
+                  <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+        </b-card>
+      </b-row>
+    </b-container>
+
+    <b-table
+      striped
+      hover
+      :items="filtered_resources"
+      :current-page="currentPage"
+      :fields="fields"
+      :filter="filter"
+      :per-page="perPage"
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
+      @filtered="onFiltered"
+    >
+      <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
+    </b-table>
+
+    <b-row class="justify-content-end">
+      <b-col md="6" class="my-1 d-flex justify-content-end">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          class="my-0"
+        ></b-pagination>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["resource_array"],
+  props: ["filtered_resources"],
   data() {
     return {
-      ascending: false,
-      resources: this.resource_array,
-      sortColumn: ""
+      totalRows: 1,
+      currentPage: 1,
+      filter: null,
+      perPage: 20,
+      sortBy: "created_at",
+      sortDesc: false,
+      fields: [
+        "index",
+        { key: "filename", sortable: true },
+        { key: "type", sortable: true },
+        { key: "title", sortable: true },
+        { key: "date", sortable: true },
+        { key: "size", sortable: true }
+      ]
     };
   },
   methods: {
-    copyFileName(id) {
-      let fileNameToCopy = document.querySelector("#resource" + id);
-      fileNameToCopy.setAttribute("type", "text");
-      fileNameToCopy.select();
-
-      try {
-        var successful = document.execCommand("copy");
-        alert("File Name was successfully copied");
-      } catch (err) {
-        alert("Oops, unable to copy");
-      }
-
-      /* unselect the range */
-      fileNameToCopy.setAttribute("type", "hidden");
-      window.getSelection().removeAllRanges();
-    },
-    sortTable: function sortTable(col) {
-      if (this.sortColumn === col) {
-        this.ascending = !this.ascending;
-      } else {
-        this.ascending = true;
-        this.sortColumn = col;
-      }
-
-      var ascending = this.ascending;
-
-      this.resources.sort(function(a, b) {
-        if (a[col] > b[col]) {
-          return ascending ? 1 : -1;
-        } else if (a[col] < b[col]) {
-          return ascending ? -1 : 1;
-        }
-        return 0;
-      });
+    onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
     }
   },
   computed: {
-    columns: function columns() {
-      if (this.resource_array.length == 56) {
-        return [];
-      } else {
-        return Object.keys(this.resource_array[0]);
-      }
+    sortOptions() {
+      // Create an options list from our fields
+      return this.filtered_resources
+        .filter(f => f.sortable)
+        .map(f => {
+          return { text: f.label, value: f.key };
+        });
     }
+  },
+  mounted() {
+    this.totalRows = this.filtered_resources.length;
   }
 };
 </script>
-
-<style scoped>
-th:hover {
-  background-color: #686868;
-  color: #fff;
-  cursor: pointer;
-}
-</style>

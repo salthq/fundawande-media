@@ -11,29 +11,10 @@
                     </div>
                     <div class="card-body">
                         @if ($resources->count())
-
-                            {{-- When I have some time I need to find a better way to filter the resource data before sending to the Vue component --}}
-                            @php
-                                $resource_array = [];
-
-                                foreach ($resources as $key => $resource) {
-                                    $filtered_resource = new stdClass();
-                                    $filtered_resource->Title = $resource->title;
-                                    $filtered_resource->Filename = $resource->filename;
-                                    $filtered_resource->Size = Fundawande::bytesToHuman($resource->size);
-                                    $filtered_resource->Mime = $resource->mime;
-                                    $filtered_resource->ID = $resource->id;
-                                    $filtered_resource->Created = $resource->created_at->format('Y-m-d');
-
-
-                                    array_push($resource_array,$filtered_resource);
-                                }
-                            @endphp
-
-                            <resource-table :resource_array="{{ json_encode($resource_array) }} ">
+                            <resource-list :full_resources="{{ $resources }} ">
                                     {{method_field('DELETE')}}
                                     @csrf
-                            </resource-table>
+                            </resource-list>
                         @else
                             You have no resources yet!
                         @endif

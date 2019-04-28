@@ -117,7 +117,7 @@ input[type="file"] {
 .filezone p {
   font-size: 1.2em;
   text-align: center;
-  padding: 50px 50px 50px 50px;
+  padding: 50px;
 }
 
 div.resource-listing {
