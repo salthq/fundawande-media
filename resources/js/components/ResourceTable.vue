@@ -30,6 +30,18 @@
       @filtered="onFiltered"
     >
       <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
+
+      <template slot="actions">
+        <b-button size="sm" variant="danger" class="mr-1">
+          <i class="far fa-trash-alt"></i>
+        </b-button>
+        <b-button size="sm" variant="info" class="mr-1">
+          <i class="fas fa-eye text-white"></i>
+        </b-button>
+        <b-button size="sm" variant="primary" class="mr-1">
+          <i class="far fa-copy"></i>
+        </b-button>
+      </template>
     </b-table>
 
     <b-row class="justify-content-end">
@@ -53,16 +65,16 @@ export default {
       totalRows: 1,
       currentPage: 1,
       filter: null,
-      perPage: 20,
+      perPage: 10,
       sortBy: "created_at",
       sortDesc: false,
       fields: [
         "index",
-        { key: "filename", sortable: true },
-        { key: "type", sortable: true },
         { key: "title", sortable: true },
+        { key: "type", sortable: true },
         { key: "date", sortable: true },
-        { key: "size", sortable: true }
+        { key: "size", sortable: false },
+        { key: "actions", label: "Actions" }
       ]
     };
   },

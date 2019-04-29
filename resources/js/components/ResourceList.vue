@@ -59,14 +59,7 @@ export default {
     filteredResources: function() {
       const filtered_resources = this.full_resources.map(resource => {
         // Weird object destructuring + spread operator hack to remove unwanted properties from the table
-        const {
-          id,
-          created_at,
-          updated_at,
-          size,
-          mime,
-          ...properties
-        } = resource;
+        const { created_at, updated_at, size, mime, ...properties } = resource;
 
         return {
           ...properties,

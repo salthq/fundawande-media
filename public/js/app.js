@@ -1825,12 +1825,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
       var filtered_resources = this.full_resources.map(function (resource) {
         // Weird object destructuring + spread operator hack to remove unwanted properties from the table
-        var id = resource.id,
-            created_at = resource.created_at,
+        var created_at = resource.created_at,
             updated_at = resource.updated_at,
             size = resource.size,
             mime = resource.mime,
-            properties = _objectWithoutProperties(resource, ["id", "created_at", "updated_at", "size", "mime"]);
+            properties = _objectWithoutProperties(resource, ["created_at", "updated_at", "size", "mime"]);
 
         return _objectSpread({}, properties, {
           date: _this.formatDate(created_at),
@@ -1901,6 +1900,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -1908,24 +1919,24 @@ __webpack_require__.r(__webpack_exports__);
       totalRows: 1,
       currentPage: 1,
       filter: null,
-      perPage: 20,
+      perPage: 10,
       sortBy: "created_at",
       sortDesc: false,
       fields: ["index", {
-        key: "filename",
+        key: "title",
         sortable: true
       }, {
         key: "type",
-        sortable: true
-      }, {
-        key: "title",
         sortable: true
       }, {
         key: "date",
         sortable: true
       }, {
         key: "size",
-        sortable: true
+        sortable: false
+      }, {
+        key: "actions",
+        label: "Actions"
       }]
     };
   },
@@ -2011,7 +2022,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       resources: [],
       uploadSuccess: false,
-      uploadPercentage: 0
+      uploadPercentage: 0,
+      max: 100
     };
   },
   methods: {
@@ -65791,42 +65803,79 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("b-table", {
-        attrs: {
-          striped: "",
-          hover: "",
-          items: _vm.filtered_resources,
-          "current-page": _vm.currentPage,
-          fields: _vm.fields,
-          filter: _vm.filter,
-          "per-page": _vm.perPage,
-          "sort-by": _vm.sortBy,
-          "sort-desc": _vm.sortDesc
-        },
-        on: {
-          "update:sortBy": function($event) {
-            _vm.sortBy = $event
+      _c(
+        "b-table",
+        {
+          attrs: {
+            striped: "",
+            hover: "",
+            items: _vm.filtered_resources,
+            "current-page": _vm.currentPage,
+            fields: _vm.fields,
+            filter: _vm.filter,
+            "per-page": _vm.perPage,
+            "sort-by": _vm.sortBy,
+            "sort-desc": _vm.sortDesc
           },
-          "update:sort-by": function($event) {
-            _vm.sortBy = $event
+          on: {
+            "update:sortBy": function($event) {
+              _vm.sortBy = $event
+            },
+            "update:sort-by": function($event) {
+              _vm.sortBy = $event
+            },
+            "update:sortDesc": function($event) {
+              _vm.sortDesc = $event
+            },
+            "update:sort-desc": function($event) {
+              _vm.sortDesc = $event
+            },
+            filtered: _vm.onFiltered
           },
-          "update:sortDesc": function($event) {
-            _vm.sortDesc = $event
-          },
-          "update:sort-desc": function($event) {
-            _vm.sortDesc = $event
-          },
-          filtered: _vm.onFiltered
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "index",
-            fn: function(data) {
-              return [_vm._v(_vm._s(data.index + 1))]
+          scopedSlots: _vm._u([
+            {
+              key: "index",
+              fn: function(data) {
+                return [_vm._v(_vm._s(data.index + 1))]
+              }
             }
-          }
-        ])
-      }),
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "template",
+            { slot: "actions" },
+            [
+              _c(
+                "b-button",
+                {
+                  staticClass: "mr-1",
+                  attrs: { size: "sm", variant: "danger" }
+                },
+                [_c("i", { staticClass: "far fa-trash-alt" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                { staticClass: "mr-1", attrs: { size: "sm", variant: "info" } },
+                [_c("i", { staticClass: "fas fa-eye text-white" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  staticClass: "mr-1",
+                  attrs: { size: "sm", variant: "primary" }
+                },
+                [_c("i", { staticClass: "far fa-copy" })]
+              )
+            ],
+            1
+          )
+        ],
+        2
+      ),
       _vm._v(" "),
       _c(
         "b-row",
@@ -65940,10 +65989,14 @@ var render = function() {
               _vm._v(" "),
               _c("p", [_vm._v("File name: " + _vm._s(resource.name))]),
               _vm._v(" "),
-              _c("progress", {
-                staticClass: "w-100",
-                attrs: { max: "100" },
-                domProps: { value: _vm.uploadPercentage }
+              _c("b-progress", {
+                staticClass: "w-100 my-2",
+                attrs: {
+                  max: _vm.max,
+                  value: _vm.uploadPercentage,
+                  "show-progress": "",
+                  animated: ""
+                }
               }),
               _vm._v(" "),
               _c(
@@ -65958,7 +66011,8 @@ var render = function() {
                 },
                 [_vm._v("Remove Resource")]
               )
-            ]
+            ],
+            1
           )
         }),
         _vm._v(" "),

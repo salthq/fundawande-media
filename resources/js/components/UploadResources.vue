@@ -25,7 +25,7 @@
           required
         >
         <p>File name: {{ resource.name }}</p>
-        <progress class="w-100" max="100" :value.prop="uploadPercentage"></progress>
+        <b-progress class="w-100 my-2" :max="max" :value="uploadPercentage" show-progress animated></b-progress>
         <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">Remove Resource</a>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -45,7 +45,8 @@ export default {
     return {
       resources: [],
       uploadSuccess: false,
-      uploadPercentage: 0
+      uploadPercentage: 0,
+      max: 100
     };
   },
   methods: {
