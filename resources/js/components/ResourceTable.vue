@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-container fluid class="my-3">
+    <b-container fluid class="my-3 mr-3">
       <b-row class="justify-content-end">
-        <b-card no-body class="py-2 d-flex justify-content-end">
+        <b-card no-body class="py-2 mr-3 d-flex justify-content-end">
           <b-col md="12">
             <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
               <b-input-group>
@@ -33,7 +33,7 @@
     </b-table>
 
     <b-row class="justify-content-end">
-      <b-col md="6" class="my-1 d-flex justify-content-end">
+      <b-col md="6" class="my-1 mr-3 d-flex justify-content-end">
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"

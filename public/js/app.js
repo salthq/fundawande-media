@@ -65716,7 +65716,7 @@ var render = function() {
     [
       _c(
         "b-container",
-        { staticClass: "my-3", attrs: { fluid: "" } },
+        { staticClass: "my-3 mr-3", attrs: { fluid: "" } },
         [
           _c(
             "b-row",
@@ -65725,7 +65725,7 @@ var render = function() {
               _c(
                 "b-card",
                 {
-                  staticClass: "py-2 d-flex justify-content-end",
+                  staticClass: "py-2 mr-3 d-flex justify-content-end",
                   attrs: { "no-body": "" }
                 },
                 [
@@ -65835,7 +65835,7 @@ var render = function() {
           _c(
             "b-col",
             {
-              staticClass: "my-1 d-flex justify-content-end",
+              staticClass: "my-1 mr-3 d-flex justify-content-end",
               attrs: { md: "6" }
             },
             [

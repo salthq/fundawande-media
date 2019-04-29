@@ -9,7 +9,7 @@
                         <h3 class="m-0">Resources</h3>
                         <a href="{{url('/resources/create')}}" class="btn primary-btn-fill">Add resource</a>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-0">
                         @if ($resources->count())
                             <resource-list :full_resources="{{ $resources }} ">
                                     {{method_field('DELETE')}}
