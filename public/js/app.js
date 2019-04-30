@@ -1945,6 +1945,17 @@ __webpack_require__.r(__webpack_exports__);
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    deleteResource: function deleteResource(id) {
+      var _this = this;
+
+      axios.post("/resources/" + id, {
+        _method: "delete"
+      }).then(function (response) {
+        _this.filtered_resources = _this.filtered_resources.filter(function (post) {
+          return post.id != id;
+        });
+      });
     }
   },
   computed: {
@@ -65803,79 +65814,80 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "b-table",
-        {
-          attrs: {
-            striped: "",
-            hover: "",
-            items: _vm.filtered_resources,
-            "current-page": _vm.currentPage,
-            fields: _vm.fields,
-            filter: _vm.filter,
-            "per-page": _vm.perPage,
-            "sort-by": _vm.sortBy,
-            "sort-desc": _vm.sortDesc
-          },
-          on: {
-            "update:sortBy": function($event) {
-              _vm.sortBy = $event
-            },
-            "update:sort-by": function($event) {
-              _vm.sortBy = $event
-            },
-            "update:sortDesc": function($event) {
-              _vm.sortDesc = $event
-            },
-            "update:sort-desc": function($event) {
-              _vm.sortDesc = $event
-            },
-            filtered: _vm.onFiltered
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "index",
-              fn: function(data) {
-                return [_vm._v(_vm._s(data.index + 1))]
-              }
-            }
-          ])
+      _c("b-table", {
+        attrs: {
+          striped: "",
+          hover: "",
+          items: _vm.filtered_resources,
+          "current-page": _vm.currentPage,
+          fields: _vm.fields,
+          filter: _vm.filter,
+          "per-page": _vm.perPage,
+          "sort-by": _vm.sortBy,
+          "sort-desc": _vm.sortDesc
         },
-        [
-          _vm._v(" "),
-          _c(
-            "template",
-            { slot: "actions" },
-            [
-              _c(
-                "b-button",
-                {
-                  staticClass: "mr-1",
-                  attrs: { size: "sm", variant: "danger" }
-                },
-                [_c("i", { staticClass: "far fa-trash-alt" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                { staticClass: "mr-1", attrs: { size: "sm", variant: "info" } },
-                [_c("i", { staticClass: "fas fa-eye text-white" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  staticClass: "mr-1",
-                  attrs: { size: "sm", variant: "primary" }
-                },
-                [_c("i", { staticClass: "far fa-copy" })]
-              )
-            ],
-            1
-          )
-        ],
-        2
-      ),
+        on: {
+          "update:sortBy": function($event) {
+            _vm.sortBy = $event
+          },
+          "update:sort-by": function($event) {
+            _vm.sortBy = $event
+          },
+          "update:sortDesc": function($event) {
+            _vm.sortDesc = $event
+          },
+          "update:sort-desc": function($event) {
+            _vm.sortDesc = $event
+          },
+          filtered: _vm.onFiltered
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "index",
+            fn: function(data) {
+              return [_vm._v(_vm._s(data.index + 1))]
+            }
+          },
+          {
+            key: "actions",
+            fn: function(data) {
+              return [
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "mr-1",
+                    attrs: { size: "sm", variant: "danger" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteResource(data.item.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-trash-alt" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "mr-1",
+                    attrs: { size: "sm", variant: "info" }
+                  },
+                  [_c("i", { staticClass: "fas fa-eye text-white" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "mr-1",
+                    attrs: { size: "sm", variant: "primary" }
+                  },
+                  [_c("i", { staticClass: "far fa-copy" })]
+                )
+              ]
+            }
+          }
+        ])
+      }),
       _vm._v(" "),
       _c(
         "b-row",

@@ -31,8 +31,8 @@
     >
       <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
 
-      <template slot="actions">
-        <b-button size="sm" variant="danger" class="mr-1">
+      <template slot="actions" slot-scope="data">
+        <b-button size="sm" variant="danger" class="mr-1" @click="deleteResource(data.item.id)">
           <i class="far fa-trash-alt"></i>
         </b-button>
         <b-button size="sm" variant="info" class="mr-1">
@@ -83,6 +83,13 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    deleteResource(id) {
+      axios.post("/resources/" + id, { _method: "delete" }).then(response => {
+        this.filtered_resources = this.filtered_resources.filter(
+          post => post.id != id
+        );
+      });
     }
   },
   computed: {
