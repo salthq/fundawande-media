@@ -1913,6 +1913,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -65885,10 +65889,13 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c(
-                  "b-button",
+                  "b-link",
                   {
-                    staticClass: "mr-1",
-                    attrs: { size: "sm", variant: "info" }
+                    staticClass: "btn btn-sm btn-info mr-1",
+                    attrs: {
+                      target: "_blank",
+                      href: "/storage/resources/" + data.item.filename
+                    }
                   },
                   [_c("i", { staticClass: "fas fa-eye text-white" })]
                 ),

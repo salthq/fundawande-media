@@ -35,9 +35,13 @@
         <b-button size="sm" variant="danger" class="mr-1" @click="deleteResource(data.item.id)">
           <i class="far fa-trash-alt"></i>
         </b-button>
-        <b-button size="sm" variant="info" class="mr-1">
+        <b-link
+          class="btn btn-sm btn-info mr-1"
+          target="_blank"
+          :href="'/storage/resources/' + data.item.filename"
+        >
           <i class="fas fa-eye text-white"></i>
-        </b-button>
+        </b-link>
         <b-button size="sm" variant="primary" class="mr-1" @click="copyFileName(data.item.id)">
           <i class="far fa-copy"></i>
         </b-button>
