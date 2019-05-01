@@ -42,8 +42,7 @@ class ResourcesController extends Controller
         $resource = new Resource;
         $file = $request->file('file');
 
-
-        $resource->title = $request->title;
+        $resource->title = $request->title[$request->index];
         $resource->mime = $file->getMimeType();
         $resource->filename = rawurlencode($file->getClientOriginalName());
         //TODO: Save the size in a human-readable format

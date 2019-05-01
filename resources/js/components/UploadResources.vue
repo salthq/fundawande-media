@@ -12,14 +12,14 @@
       <!-- Slot for CSRF token -->
       <slot></slot>
       <div
-        v-for="(resource, key) in resources"
+        v-for="(resource, index) in resources"
         class="form-group resource-listing my-3"
-        v-bind:key="key"
+        v-bind:key="index"
       >
         <label for="title">Resource Title</label>
         <input
           type="text"
-          name="title"
+          name="title[]"
           class="form-control mb-3"
           placeholder="Enter title for resource here"
           required
@@ -46,7 +46,7 @@ export default {
       resources: [],
       uploadSuccess: false,
       uploadPercentage: 0,
-      max: 100
+      max: 100,
     };
   },
   methods: {
@@ -68,6 +68,7 @@ export default {
         let form = document.getElementById("form");
         let formData = new FormData(form);
         formData.append("file", this.resources[i]);
+        formData.append("index", i);
 
         axios
           .post("/resources", formData, {

@@ -2085,6 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
         var form = document.getElementById("form");
         var formData = new FormData(form);
         formData.append("file", this.resources[i]);
+        formData.append("index", i);
         axios.post("/resources", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -66090,10 +66091,10 @@ var render = function() {
       [
         _vm._t("default"),
         _vm._v(" "),
-        _vm._l(_vm.resources, function(resource, key) {
+        _vm._l(_vm.resources, function(resource, index) {
           return _c(
             "div",
-            { key: key, staticClass: "form-group resource-listing my-3" },
+            { key: index, staticClass: "form-group resource-listing my-3" },
             [
               _c("label", { attrs: { for: "title" } }, [
                 _vm._v("Resource Title")
@@ -66103,7 +66104,7 @@ var render = function() {
                 staticClass: "form-control mb-3",
                 attrs: {
                   type: "text",
-                  name: "title",
+                  name: "title[]",
                   placeholder: "Enter title for resource here",
                   required: ""
                 }
@@ -66127,7 +66128,7 @@ var render = function() {
                   staticClass: "remove-resource text-danger pb-2",
                   on: {
                     click: function($event) {
-                      return _vm.removeResource(key)
+                      return _vm.removeResource(_vm.key)
                     }
                   }
                 },
