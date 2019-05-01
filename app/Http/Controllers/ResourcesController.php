@@ -41,10 +41,11 @@ class ResourcesController extends Controller
 
         $resource = new Resource;
         $file = $request->file('file');
+        $formatted_file = trim(str_replace(' ', '_', $file->getClientOriginalName()));
 
         $resource->title = $request->title[$request->index];
         $resource->mime = $file->getMimeType();
-        $resource->filename = rawurlencode($file->getClientOriginalName());
+        $resource->filename = $formatted_file;
         //TODO: Save the size in a human-readable format
         $resource->size = $file->getClientSize();
 
