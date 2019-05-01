@@ -38,9 +38,10 @@
         <b-button size="sm" variant="info" class="mr-1">
           <i class="fas fa-eye text-white"></i>
         </b-button>
-        <b-button size="sm" variant="primary" class="mr-1">
+        <b-button size="sm" variant="primary" class="mr-1" @click="copyFileName(data.item.id)">
           <i class="far fa-copy"></i>
         </b-button>
+        <input type="hidden" :id="'resource' + data.item.id" :value="data.item.filename">
       </template>
     </b-table>
 
@@ -90,6 +91,20 @@ export default {
           post => post.id != id
         );
       });
+    },
+    copyFileName(id) {
+      let fileNameToCopy = document.querySelector("#resource" + id);
+      fileNameToCopy.setAttribute("type", "text");
+      fileNameToCopy.select();
+      try {
+        var successful = document.execCommand("copy");
+        alert("File was successfully copied");
+      } catch (err) {
+        alert("Oops, unable to copy");
+      }
+      /* unselect the range */
+      fileNameToCopy.setAttribute("type", "hidden");
+      window.getSelection().removeAllRanges();
     }
   },
   computed: {

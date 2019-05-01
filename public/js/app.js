@@ -1912,6 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -1956,6 +1957,23 @@ __webpack_require__.r(__webpack_exports__);
           return post.id != id;
         });
       });
+    },
+    copyFileName: function copyFileName(id) {
+      var fileNameToCopy = document.querySelector("#resource" + id);
+      fileNameToCopy.setAttribute("type", "text");
+      fileNameToCopy.select();
+
+      try {
+        var successful = document.execCommand("copy");
+        alert("File was successfully copied");
+      } catch (err) {
+        alert("Oops, unable to copy");
+      }
+      /* unselect the range */
+
+
+      fileNameToCopy.setAttribute("type", "hidden");
+      window.getSelection().removeAllRanges();
     }
   },
   computed: {
@@ -65879,10 +65897,20 @@ var render = function() {
                   "b-button",
                   {
                     staticClass: "mr-1",
-                    attrs: { size: "sm", variant: "primary" }
+                    attrs: { size: "sm", variant: "primary" },
+                    on: {
+                      click: function($event) {
+                        return _vm.copyFileName(data.item.id)
+                      }
+                    }
                   },
                   [_c("i", { staticClass: "far fa-copy" })]
-                )
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "hidden", id: "resource" + data.item.id },
+                  domProps: { value: data.item.filename }
+                })
               ]
             }
           }
