@@ -50,7 +50,10 @@
     </b-table>
 
     <b-row class="justify-content-end">
-      <b-col md="6" class="my-1 mr-3 d-flex justify-content-end">
+      <b-col md="6" class="my-1 mr-3 d-flex justify-content-end pagination_options">
+        <b-form-group label-cols-sm="6" label="Per page" class="mb-0 mx-3">
+          <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
+        </b-form-group>
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"
@@ -71,6 +74,7 @@ export default {
       currentPage: 1,
       filter: null,
       perPage: 10,
+      pageOptions: [5, 10, 15, 20],
       sortBy: "created_at",
       sortDesc: false,
       fields: [
@@ -126,3 +130,13 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+.pagination_options {
+  fieldset {
+    width: 175px;
+  }
+}
+</style>
+
