@@ -66184,7 +66184,7 @@ var render = function() {
             {
               staticClass:
                 "my-2 mr-3 d-flex justify-content-center justify-content-md-end",
-              attrs: { md: "2" }
+              attrs: { md: "3" }
             },
             [
               _c("b-pagination", {

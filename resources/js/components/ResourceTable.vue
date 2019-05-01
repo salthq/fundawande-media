@@ -99,7 +99,7 @@
           <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
         </b-form-group>
       </b-col>
-      <b-col md="2" class="my-2 mr-3 d-flex justify-content-center justify-content-md-end">
+      <b-col md="3" class="my-2 mr-3 d-flex justify-content-center justify-content-md-end">
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"
