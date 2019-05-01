@@ -1920,6 +1920,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -33616,7 +33638,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".pagination_options fieldset[data-v-e62a67f6] {\n  width: 175px;\n}", ""]);
+exports.push([module.i, "@media only screen and (max-width: 600px) {\n.pagination_options fieldset[data-v-e62a67f6] {\n    width: 175px;\n}\n}\n.action_button[data-v-e62a67f6] {\n  width: 28px;\n}", ""]);
 
 // exports
 
@@ -65819,12 +65841,16 @@ var render = function() {
         [
           _c(
             "b-row",
-            { staticClass: "justify-content-end" },
+            {
+              staticClass:
+                "justify-content-center justify-content-md-endjustify-content-end"
+            },
             [
               _c(
                 "b-card",
                 {
-                  staticClass: "py-2 mr-3 d-flex justify-content-end",
+                  staticClass:
+                    "py-2 mr-md-3 d-flex justify-content-center justify-content-md-end",
                   attrs: { "no-body": "" }
                 },
                 [
@@ -65890,104 +65916,126 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("b-table", {
-        attrs: {
-          striped: "",
-          hover: "",
-          items: _vm.filtered_resources,
-          "current-page": _vm.currentPage,
-          fields: _vm.fields,
-          filter: _vm.filter,
-          "per-page": _vm.perPage,
-          "sort-by": _vm.sortBy,
-          "sort-desc": _vm.sortDesc
-        },
-        on: {
-          "update:sortBy": function($event) {
-            _vm.sortBy = $event
-          },
-          "update:sort-by": function($event) {
-            _vm.sortBy = $event
-          },
-          "update:sortDesc": function($event) {
-            _vm.sortDesc = $event
-          },
-          "update:sort-desc": function($event) {
-            _vm.sortDesc = $event
-          },
-          filtered: _vm.onFiltered
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "index",
-            fn: function(data) {
-              return [_vm._v(_vm._s(data.index + 1))]
-            }
-          },
-          {
-            key: "actions",
-            fn: function(data) {
-              return [
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "mr-1",
-                    attrs: { size: "sm", variant: "danger" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteResource(data.item.id)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "far fa-trash-alt" })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-link",
-                  {
-                    staticClass: "btn btn-sm btn-info mr-1",
-                    attrs: {
-                      target: "_blank",
-                      href: "/storage/resources/" + data.item.filename
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-eye text-white" })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "mr-1",
-                    attrs: { size: "sm", variant: "primary" },
-                    on: {
-                      click: function($event) {
-                        return _vm.copyFileName(data.item.id)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "far fa-copy" })]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: { type: "hidden", id: "resource" + data.item.id },
-                  domProps: { value: data.item.filename }
-                })
-              ]
-            }
-          }
-        ])
-      }),
+      _c(
+        "div",
+        { staticClass: "table-responsive" },
+        [
+          _c("b-table", {
+            attrs: {
+              striped: "",
+              hover: "",
+              items: _vm.filtered_resources,
+              "current-page": _vm.currentPage,
+              fields: _vm.fields,
+              filter: _vm.filter,
+              "per-page": _vm.perPage,
+              "sort-by": _vm.sortBy,
+              "sort-desc": _vm.sortDesc
+            },
+            on: {
+              "update:sortBy": function($event) {
+                _vm.sortBy = $event
+              },
+              "update:sort-by": function($event) {
+                _vm.sortBy = $event
+              },
+              "update:sortDesc": function($event) {
+                _vm.sortDesc = $event
+              },
+              "update:sort-desc": function($event) {
+                _vm.sortDesc = $event
+              },
+              filtered: _vm.onFiltered
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "index",
+                fn: function(data) {
+                  return [_vm._v(_vm._s(data.index + 1))]
+                }
+              },
+              {
+                key: "actions",
+                fn: function(data) {
+                  return [
+                    _c(
+                      "b-button",
+                      {
+                        staticClass: "action_button mr-1 my-1",
+                        attrs: { size: "sm", variant: "danger" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteResource(data.item.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-link",
+                      {
+                        staticClass:
+                          "action_button btn btn-sm btn-info mr-1 my-1",
+                        attrs: {
+                          target: "_blank",
+                          href: "/storage/resources/" + data.item.filename
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye text-white" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        staticClass: "action_button mr-1 my-1",
+                        attrs: { size: "sm", variant: "primary" },
+                        on: {
+                          click: function($event) {
+                            return _vm.copyFileName(data.item.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-copy" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        staticClass: "action_button mr-1 my-1",
+                        attrs: { size: "sm", variant: "primary" },
+                        on: {
+                          click: function($event) {
+                            return _vm.copyFileName(data.item.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-copy" })]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", id: "resource" + data.item.id },
+                      domProps: { value: data.item.filename }
+                    })
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "b-row",
-        { staticClass: "justify-content-end" },
+        { staticClass: "justify-content-center justify-content-md-end" },
         [
           _c(
             "b-col",
             {
               staticClass:
-                "my-1 mr-3 d-flex justify-content-end pagination_options",
-              attrs: { md: "6" }
+                "my-1 mr-3 d-flex justify-content-center justify-content-md-end",
+              attrs: { md: "3" }
             },
             [
               _c(
@@ -66009,10 +66057,21 @@ var render = function() {
                   })
                 ],
                 1
-              ),
-              _vm._v(" "),
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            {
+              staticClass:
+                "d-flex justify-content-center justify-content-md-end my-3 my-md-0",
+              attrs: { md: "3" }
+            },
+            [
               _c("b-pagination", {
-                staticClass: "my-0",
+                staticClass: "my-0 pagination_options",
                 attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
                 model: {
                   value: _vm.currentPage,

@@ -1,8 +1,8 @@
 <template>
   <div>
     <b-container fluid class="my-3 mr-3">
-      <b-row class="justify-content-end">
-        <b-card no-body class="py-2 mr-3 d-flex justify-content-end">
+      <b-row class="justify-content-center justify-content-md-endjustify-content-end">
+        <b-card no-body class="py-2 mr-md-3 d-flex justify-content-center justify-content-md-end">
           <b-col md="12">
             <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
               <b-input-group>
@@ -17,48 +17,70 @@
       </b-row>
     </b-container>
 
-    <b-table
-      striped
-      hover
-      :items="filtered_resources"
-      :current-page="currentPage"
-      :fields="fields"
-      :filter="filter"
-      :per-page="perPage"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
-      @filtered="onFiltered"
-    >
-      <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
+    <div class="table-responsive">
+      <b-table
+        striped
+        hover
+        :items="filtered_resources"
+        :current-page="currentPage"
+        :fields="fields"
+        :filter="filter"
+        :per-page="perPage"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        @filtered="onFiltered"
+      >
+        <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
 
-      <template slot="actions" slot-scope="data">
-        <b-button size="sm" variant="danger" class="mr-1" @click="deleteResource(data.item.id)">
-          <i class="far fa-trash-alt"></i>
-        </b-button>
-        <b-link
-          class="btn btn-sm btn-info mr-1"
-          target="_blank"
-          :href="'/storage/resources/' + data.item.filename"
-        >
-          <i class="fas fa-eye text-white"></i>
-        </b-link>
-        <b-button size="sm" variant="primary" class="mr-1" @click="copyFileName(data.item.id)">
-          <i class="far fa-copy"></i>
-        </b-button>
-        <input type="hidden" :id="'resource' + data.item.id" :value="data.item.filename">
-      </template>
-    </b-table>
+        <template slot="actions" slot-scope="data">
+          <b-button
+            size="sm"
+            variant="danger"
+            class="action_button mr-1 my-1"
+            @click="deleteResource(data.item.id)"
+          >
+            <i class="far fa-trash-alt"></i>
+          </b-button>
+          <b-link
+            class="action_button btn btn-sm btn-info mr-1 my-1"
+            target="_blank"
+            :href="'/storage/resources/' + data.item.filename"
+          >
+            <i class="fas fa-eye text-white"></i>
+          </b-link>
+          <b-button
+            size="sm"
+            variant="primary"
+            class="action_button mr-1 my-1"
+            @click="copyFileName(data.item.id)"
+          >
+            <i class="far fa-copy"></i>
+          </b-button>
+          <b-button
+            size="sm"
+            variant="primary"
+            class="action_button mr-1 my-1"
+            @click="copyFileName(data.item.id)"
+          >
+            <i class="far fa-copy"></i>
+          </b-button>
+          <input type="hidden" :id="'resource' + data.item.id" :value="data.item.filename">
+        </template>
+      </b-table>
+    </div>
 
-    <b-row class="justify-content-end">
-      <b-col md="6" class="my-1 mr-3 d-flex justify-content-end pagination_options">
+    <b-row class="justify-content-center justify-content-md-end">
+      <b-col md="3" class="my-1 mr-3 d-flex justify-content-center justify-content-md-end">
         <b-form-group label-cols-sm="6" label="Per page" class="mb-0 mx-3">
           <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
         </b-form-group>
+      </b-col>
+      <b-col md="3" class="d-flex justify-content-center justify-content-md-end my-3 my-md-0">
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"
           :per-page="perPage"
-          class="my-0"
+          class="my-0 pagination_options"
         ></b-pagination>
       </b-col>
     </b-row>
@@ -134,9 +156,15 @@ export default {
 
 <style lang="scss" scoped>
 .pagination_options {
-  fieldset {
-    width: 175px;
+  @media only screen and (max-width: 600px) {
+    fieldset {
+      width: 175px;
+    }
   }
+}
+
+.action_button {
+  width: 28px;
 }
 </style>
 
