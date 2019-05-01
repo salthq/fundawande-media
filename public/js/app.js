@@ -1931,7 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
       pageOptions: [5, 10, 15, 20],
       sortBy: "created_at",
       sortDesc: false,
-      fields: ["index", {
+      fields: ["#", {
         key: "title",
         sortable: true
       }, {
