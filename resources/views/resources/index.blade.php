@@ -12,8 +12,6 @@
                     <div class="card-body p-0">
                         @if ($resources->count())
                             <resource-list :full_resources="{{ $resources }} ">
-                                    {{method_field('DELETE')}}
-                                    @csrf
                             </resource-list>
                         @else
                             You have no resources yet!

@@ -1942,6 +1942,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -1953,6 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
       pageOptions: [5, 10, 15, 20],
       sortBy: "created_at",
       sortDesc: false,
+      items: [],
       fields: ["index", {
         key: "title",
         sortable: true
@@ -1968,7 +1993,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: "actions",
         label: "Actions"
-      }]
+      }],
+      editedTitle: "",
+      _method: "PUT"
     };
   },
   methods: {
@@ -2004,12 +2031,34 @@ __webpack_require__.r(__webpack_exports__);
 
       fileNameToCopy.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
+    },
+    editResourceTitle: function editResourceTitle(id) {
+      var _this2 = this;
+
+      axios.post("/resources/".concat(id), {
+        _method: "PUT",
+        title: this.editedTitle
+      }).then(function (data) {
+        _this2.hideModal(id);
+      })["catch"](function (data) {
+        console.log(data.response);
+      });
+    },
+    showModal: function showModal(id) {
+      this.$root.$emit("bv::show::modal", "modal-".concat(id));
+    },
+    hideModal: function hideModal(id) {
+      this.$root.$emit("bv::hide::modal", "modal-".concat(id));
     }
   },
   computed: {
+    getItems: function getItems() {
+      this.items = this.filtered_resources;
+      return this.items;
+    },
     sortOptions: function sortOptions() {
       // Create an options list from our fields
-      return this.filtered_resources.filter(function (f) {
+      return this.items.filter(function (f) {
         return f.sortable;
       }).map(function (f) {
         return {
@@ -33638,7 +33687,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "@media only screen and (max-width: 600px) {\n.pagination_options fieldset[data-v-e62a67f6] {\n    width: 175px;\n}\n}\n.action_button[data-v-e62a67f6] {\n  width: 28px;\n}", ""]);
+exports.push([module.i, "@media only screen and (min-width: 768px) {\n.pagination_options fieldset[data-v-e62a67f6] {\n    width: 175px;\n}\n}\n@media only screen and (max-width: 767px) {\n.action_button[data-v-e62a67f6] {\n    width: 28px;\n}\n}", ""]);
 
 // exports
 
@@ -65841,10 +65890,7 @@ var render = function() {
         [
           _c(
             "b-row",
-            {
-              staticClass:
-                "justify-content-center justify-content-md-endjustify-content-end"
-            },
+            { staticClass: "justify-content-center justify-content-md-end" },
             [
               _c(
                 "b-card",
@@ -65924,7 +65970,7 @@ var render = function() {
             attrs: {
               striped: "",
               hover: "",
-              items: _vm.filtered_resources,
+              items: _vm.getItems,
               "current-page": _vm.currentPage,
               fields: _vm.fields,
               filter: _vm.filter,
@@ -66003,20 +66049,91 @@ var render = function() {
                       "b-button",
                       {
                         staticClass: "action_button mr-1 my-1",
-                        attrs: { size: "sm", variant: "primary" },
+                        attrs: { size: "sm", variant: "secondary" },
                         on: {
                           click: function($event) {
-                            return _vm.copyFileName(data.item.id)
+                            return _vm.showModal(data.item.id)
                           }
                         }
                       },
-                      [_c("i", { staticClass: "far fa-copy" })]
+                      [_c("i", { staticClass: "fas fa-wrench text-white" })]
                     ),
                     _vm._v(" "),
                     _c("input", {
                       attrs: { type: "hidden", id: "resource" + data.item.id },
                       domProps: { value: data.item.filename }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "b-modal",
+                      {
+                        ref: "my-modal",
+                        attrs: {
+                          "hide-footer": "",
+                          id: "modal-" + data.item.id,
+                          title: "Using Component Methods"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "d-block" }, [
+                          _c("h3", [_vm._v("Edit Resource Title")]),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            {
+                              attrs: { method: "POST", id: "form" },
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.editResourceTitle($event)
+                                }
+                              }
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.editedTitle,
+                                    expression: "editedTitle"
+                                  }
+                                ],
+                                staticClass: "form-control my-3",
+                                attrs: {
+                                  type: "text",
+                                  name: "title",
+                                  placeholder: data.item.title,
+                                  required: ""
+                                },
+                                domProps: { value: _vm.editedTitle },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.editedTitle = $event.target.value
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.editResourceTitle(data.item.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Submit")]
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
                   ]
                 }
               }
@@ -66034,7 +66151,7 @@ var render = function() {
             "b-col",
             {
               staticClass:
-                "my-1 mr-3 d-flex justify-content-center justify-content-md-end",
+                "my-2 d-flex justify-content-center justify-content-md-end pagination_options",
               attrs: { md: "3" }
             },
             [
@@ -66066,12 +66183,12 @@ var render = function() {
             "b-col",
             {
               staticClass:
-                "d-flex justify-content-center justify-content-md-end my-3 my-md-0",
-              attrs: { md: "3" }
+                "my-2 mr-3 d-flex justify-content-center justify-content-md-end",
+              attrs: { md: "2" }
             },
             [
               _c("b-pagination", {
-                staticClass: "my-0 pagination_options",
+                staticClass: "my-0",
                 attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
                 model: {
                   value: _vm.currentPage,

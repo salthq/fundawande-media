@@ -88,7 +88,7 @@ class ResourcesController extends Controller
      */
     public function update(Request $request, Resource $resource)
     {
-        //
+        $resource->update(request(['title']));
     }
 
     /**

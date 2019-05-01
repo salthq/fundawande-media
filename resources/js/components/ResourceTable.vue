@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container fluid class="my-3 mr-3">
-      <b-row class="justify-content-center justify-content-md-endjustify-content-end">
+      <b-row class="justify-content-center justify-content-md-end">
         <b-card no-body class="py-2 mr-md-3 d-flex justify-content-center justify-content-md-end">
           <b-col md="12">
             <b-form-group label-cols-sm="3" label="Filter" class="mb-0">
@@ -21,7 +21,7 @@
       <b-table
         striped
         hover
-        :items="filtered_resources"
+        :items="getItems"
         :current-page="currentPage"
         :fields="fields"
         :filter="filter"
@@ -58,29 +58,53 @@
           </b-button>
           <b-button
             size="sm"
-            variant="primary"
+            variant="secondary"
             class="action_button mr-1 my-1"
-            @click="copyFileName(data.item.id)"
+            @click="showModal(data.item.id)"
           >
-            <i class="far fa-copy"></i>
+            <i class="fas fa-wrench text-white"></i>
           </b-button>
           <input type="hidden" :id="'resource' + data.item.id" :value="data.item.filename">
+          <b-modal
+            ref="my-modal"
+            hide-footer
+            :id="'modal-' + data.item.id"
+            title="Using Component Methods"
+          >
+            <div class="d-block">
+              <h3>Edit Resource Title</h3>
+              <form method="POST" id="form" @submit.prevent="editResourceTitle">
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control my-3"
+                  :placeholder="data.item.title"
+                  v-model="editedTitle"
+                  required
+                >
+                <button @click="editResourceTitle(data.item.id)" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </b-modal>
         </template>
       </b-table>
     </div>
 
     <b-row class="justify-content-center justify-content-md-end">
-      <b-col md="3" class="my-1 mr-3 d-flex justify-content-center justify-content-md-end">
+      <b-col
+        md="3"
+        class="my-2 d-flex justify-content-center justify-content-md-end pagination_options"
+      >
         <b-form-group label-cols-sm="6" label="Per page" class="mb-0 mx-3">
           <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
         </b-form-group>
       </b-col>
-      <b-col md="3" class="d-flex justify-content-center justify-content-md-end my-3 my-md-0">
+      <b-col md="2" class="my-2 mr-3 d-flex justify-content-center justify-content-md-end">
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"
           :per-page="perPage"
-          class="my-0 pagination_options"
+          class="my-0"
         ></b-pagination>
       </b-col>
     </b-row>
@@ -99,6 +123,7 @@ export default {
       pageOptions: [5, 10, 15, 20],
       sortBy: "created_at",
       sortDesc: false,
+      items: [],
       fields: [
         "index",
         { key: "title", sortable: true },
@@ -106,7 +131,9 @@ export default {
         { key: "date", sortable: true },
         { key: "size", sortable: false },
         { key: "actions", label: "Actions" }
-      ]
+      ],
+      editedTitle: "",
+      _method: "PUT"
     };
   },
   methods: {
@@ -135,12 +162,33 @@ export default {
       /* unselect the range */
       fileNameToCopy.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
+    },
+    editResourceTitle(id) {
+      axios
+        .post(`/resources/${id}`, { _method: "PUT", title: this.editedTitle })
+        .then(data => {
+          this.hideModal(id);
+        })
+        .catch(function(data) {
+          console.log(data.response);
+        });
+    },
+    showModal(id) {
+      this.$root.$emit("bv::show::modal", `modal-${id}`);
+    },
+    hideModal(id) {
+      this.$root.$emit("bv::hide::modal", `modal-${id}`);
     }
   },
   computed: {
+    getItems() {
+      this.items = this.filtered_resources;
+
+      return this.items;
+    },
     sortOptions() {
       // Create an options list from our fields
-      return this.filtered_resources
+      return this.items
         .filter(f => f.sortable)
         .map(f => {
           return { text: f.label, value: f.key };
@@ -155,16 +203,18 @@ export default {
 
 
 <style lang="scss" scoped>
-.pagination_options {
-  @media only screen and (max-width: 600px) {
+@media only screen and (min-width: 768px) {
+  .pagination_options {
     fieldset {
       width: 175px;
     }
   }
 }
 
-.action_button {
-  width: 28px;
+@media only screen and (max-width: 767px) {
+  .action_button {
+    width: 28px;
+  }
 }
 </style>
 
