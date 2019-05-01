@@ -78,7 +78,7 @@ export default {
       sortBy: "created_at",
       sortDesc: false,
       fields: [
-        "#",
+        "index",
         { key: "title", sortable: true },
         { key: "type", sortable: true },
         { key: "date", sortable: true },
