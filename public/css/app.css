@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto|Rubik);@charset "UTF-8";
 
 /* ==========================================================================
 * Utilities
@@ -15,62 +15,6 @@
 		 *Styles*
 }
 *********************/
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"), url("/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-BoldItalic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
 
 /* ==========================================================================
 * App Global styling
@@ -294,62 +238,6 @@ body hr {
 		 *Styles*
 }
 *********************/
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"), url("/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-BoldItalic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -12097,62 +11985,6 @@ input[type=color].form-control:disabled {
 		 *Styles*
 }
 *********************/
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/RobotoCondensed-Regular-webfont.woff") format("woff"), url("/fonts/Roboto/RobotoCondensed-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-Bold-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto/Roboto-BoldItalic-webfont.woff") format("woff"), url("/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Bold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Rubik";
-  src: url("/fonts/Rubik/Rubik-BoldItalic.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
 
 .fw-navbar {
   background-color: #4A4A4A;
