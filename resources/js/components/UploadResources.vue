@@ -13,22 +13,35 @@
       <slot></slot>
       <div
         v-for="(resource, index) in resources"
-        class="form-group resource-listing my-3"
+        class="form-group resource-listing py-3"
         v-bind:key="index"
       >
-        <label for="title">Resource Title</label>
+        <h3 class="pb-2">{{ index + 1 }}</h3>
+        <label for="title">Edit resource name</label>
         <input
           type="text"
           name="title[]"
           class="form-control mb-3"
           placeholder="Enter title for resource here"
           required
+          v-model="resource.name"
         >
-        <p>File name: {{ resource.name }}</p>
+        <p>
+          <b>File name:</b>
+          {{ resource.name }}
+        </p>
 
-        <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">Remove Resource</a>
+        <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">
+          <i class="far fa-trash-alt"></i> Remove Resource
+        </a>
       </div>
-      <b-progress class="w-100 my-2" :max="max" :value="uploadPercentage" show-progress animated></b-progress>
+      <b-progress
+        class="w-100 my-2 px-1"
+        :max="max"
+        :value="uploadPercentage"
+        show-progress
+        animated
+      ></b-progress>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <div class="my-3 alert alert-success" role="alert" v-show="uploadSuccess">

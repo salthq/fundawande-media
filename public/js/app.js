@@ -2130,6 +2130,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -66265,23 +66278,45 @@ var render = function() {
         _vm._l(_vm.resources, function(resource, index) {
           return _c(
             "div",
-            { key: index, staticClass: "form-group resource-listing my-3" },
+            { key: index, staticClass: "form-group resource-listing py-3" },
             [
+              _c("h3", { staticClass: "pb-2" }, [_vm._v(_vm._s(index + 1))]),
+              _vm._v(" "),
               _c("label", { attrs: { for: "title" } }, [
-                _vm._v("Resource Title")
+                _vm._v("Edit resource name")
               ]),
               _vm._v(" "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: resource.name,
+                    expression: "resource.name"
+                  }
+                ],
                 staticClass: "form-control mb-3",
                 attrs: {
                   type: "text",
                   name: "title[]",
                   placeholder: "Enter title for resource here",
                   required: ""
+                },
+                domProps: { value: resource.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(resource, "name", $event.target.value)
+                  }
                 }
               }),
               _vm._v(" "),
-              _c("p", [_vm._v("File name: " + _vm._s(resource.name))]),
+              _c("p", [
+                _c("b", [_vm._v("File name:")]),
+                _vm._v("\n        " + _vm._s(resource.name) + "\n      ")
+              ]),
               _vm._v(" "),
               _c(
                 "a",
@@ -66293,14 +66328,17 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Remove Resource")]
+                [
+                  _c("i", { staticClass: "far fa-trash-alt" }),
+                  _vm._v(" Remove Resource\n      ")
+                ]
               )
             ]
           )
         }),
         _vm._v(" "),
         _c("b-progress", {
-          staticClass: "w-100 my-2",
+          staticClass: "w-100 my-2 px-1",
           attrs: {
             max: _vm.max,
             value: _vm.uploadPercentage,
