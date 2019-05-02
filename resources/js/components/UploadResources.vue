@@ -25,9 +25,10 @@
           required
         >
         <p>File name: {{ resource.name }}</p>
-        <b-progress class="w-100 my-2" :max="max" :value="uploadPercentage" show-progress animated></b-progress>
+
         <a class="remove-resource text-danger pb-2" v-on:click="removeResource(key)">Remove Resource</a>
       </div>
+      <b-progress class="w-100 my-2" :max="max" :value="uploadPercentage" show-progress animated></b-progress>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <div class="my-3 alert alert-success" role="alert" v-show="uploadSuccess">
@@ -46,7 +47,7 @@ export default {
       resources: [],
       uploadSuccess: false,
       uploadPercentage: 0,
-      max: 100,
+      max: 100
     };
   },
   methods: {
@@ -83,6 +84,7 @@ export default {
           })
           .then(data => {
             this.uploadSuccess = true;
+            this.uploadPercentage = 0;
             this.resources = [];
           })
           .catch(function(data) {

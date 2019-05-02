@@ -2125,6 +2125,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2166,6 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
           }.bind(this)
         }).then(function (data) {
           _this.uploadSuccess = true;
+          _this.uploadPercentage = 0;
           _this.resources = [];
         })["catch"](function (data) {
           console.log(data.response);
@@ -66288,16 +66290,6 @@ var render = function() {
               _vm._v(" "),
               _c("p", [_vm._v("File name: " + _vm._s(resource.name))]),
               _vm._v(" "),
-              _c("b-progress", {
-                staticClass: "w-100 my-2",
-                attrs: {
-                  max: _vm.max,
-                  value: _vm.uploadPercentage,
-                  "show-progress": "",
-                  animated: ""
-                }
-              }),
-              _vm._v(" "),
               _c(
                 "a",
                 {
@@ -66310,9 +66302,18 @@ var render = function() {
                 },
                 [_vm._v("Remove Resource")]
               )
-            ],
-            1
+            ]
           )
+        }),
+        _vm._v(" "),
+        _c("b-progress", {
+          staticClass: "w-100 my-2",
+          attrs: {
+            max: _vm.max,
+            value: _vm.uploadPercentage,
+            "show-progress": "",
+            animated: ""
+          }
         }),
         _vm._v(" "),
         _c(
