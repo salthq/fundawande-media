@@ -2033,14 +2033,20 @@ __webpack_require__.r(__webpack_exports__);
     editResourceTitle: function editResourceTitle(id) {
       var _this2 = this;
 
-      axios.post("/resources/".concat(id), {
+      axios.post("/resources/" + id, {
         _method: "PUT",
         title: this.editedTitle
       }).then(function (data) {
         _this2.hideModal(id);
-      })["catch"](function (data) {
-        console.log(data.response);
-      });
+
+        var index = _this2.filtered_resources.findIndex(function (resource) {
+          return resource.id === id;
+        });
+
+        if (~index) {
+          _this2.filtered_resources[index].title = _this2.editedTitle;
+        }
+      })["catch"](function (data) {});
     },
     showModal: function showModal(id) {
       this.$root.$emit("bv::show::modal", "modal-".concat(id));

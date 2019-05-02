@@ -163,13 +163,19 @@ export default {
     },
     editResourceTitle(id) {
       axios
-        .post(`/resources/${id}`, { _method: "PUT", title: this.editedTitle })
+        .post("/resources/" + id, { _method: "PUT", title: this.editedTitle })
         .then(data => {
           this.hideModal(id);
+
+          let index = this.filtered_resources.findIndex(resource => {
+            return resource.id === id;
+          });
+
+          if (~index) {
+            this.filtered_resources[index].title = this.editedTitle;
+          }
         })
-        .catch(function(data) {
-          console.log(data.response);
-        });
+        .catch(function(data) {});
     },
     showModal(id) {
       this.$root.$emit("bv::show::modal", `modal-${id}`);
