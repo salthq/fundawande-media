@@ -92,14 +92,12 @@
 
     <b-row class="justify-content-center justify-content-md-end">
       <b-col
-        md="3"
+        md="12"
         class="my-2 d-flex justify-content-center justify-content-md-end pagination_options"
       >
         <b-form-group label-cols-sm="6" label="Per page" class="mb-0 mx-3">
           <b-form-select v-model="perPage" :options="pageOptions"></b-form-select>
         </b-form-group>
-      </b-col>
-      <b-col md="3" class="my-2 mr-3 d-flex justify-content-center justify-content-md-end">
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"

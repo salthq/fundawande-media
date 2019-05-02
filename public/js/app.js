@@ -1964,8 +1964,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -66154,7 +66152,7 @@ var render = function() {
             {
               staticClass:
                 "my-2 d-flex justify-content-center justify-content-md-end pagination_options",
-              attrs: { md: "3" }
+              attrs: { md: "12" }
             },
             [
               _c(
@@ -66176,19 +66174,8 @@ var render = function() {
                   })
                 ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-col",
-            {
-              staticClass:
-                "my-2 mr-3 d-flex justify-content-center justify-content-md-end",
-              attrs: { md: "3" }
-            },
-            [
+              ),
+              _vm._v(" "),
               _c("b-pagination", {
                 staticClass: "my-0",
                 attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
