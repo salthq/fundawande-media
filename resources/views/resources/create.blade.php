@@ -17,7 +17,7 @@
 
         <div class="row my-3">
             <div class="col text-center">
-                <a href="/resources" class="primary-text ">View Resources</a>
+                <a href="/resources" class="primary-text ">Go back to resource list</a>
             </div>
         </div>
 
