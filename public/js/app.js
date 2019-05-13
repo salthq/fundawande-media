@@ -1994,6 +1994,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -2031,6 +2039,12 @@ __webpack_require__.r(__webpack_exports__);
         key: "actions",
         label: "Actions"
       }],
+      deletionModal: {
+        id: "deletion-modal",
+        title: "Delete Resource Confirmation",
+        content: "Are you sure you want to delete this resource?",
+        item: ""
+      },
       editedTitle: "",
       _method: "PUT"
     };
@@ -2040,6 +2054,13 @@ __webpack_require__.r(__webpack_exports__);
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    showDeletionModal: function showDeletionModal(item, button) {
+      this.deletionModal.item = item;
+      this.$root.$emit("bv::show::modal", this.deletionModal.id, button);
+    },
+    resetDeletionModal: function resetDeletionModal() {
+      this.deletionModal.item = "";
     },
     deleteResource: function deleteResource(id) {
       var _this = this;
@@ -66216,7 +66237,10 @@ var render = function() {
                         attrs: { size: "sm", variant: "danger" },
                         on: {
                           click: function($event) {
-                            return _vm.deleteResource(data.item.id)
+                            return _vm.showDeletionModal(
+                              data.item.id,
+                              $event.target
+                            )
                           }
                         }
                       },
@@ -66397,6 +66421,22 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: { id: _vm.deletionModal.id, title: _vm.deletionModal.title },
+          on: {
+            ok: function($event) {
+              return _vm.deleteResource(_vm.deletionModal.item)
+            },
+            hide: function($event) {
+              return _vm.resetDeletionModal()
+            }
+          }
+        },
+        [_vm._v(_vm._s(_vm.deletionModal.content))]
       )
     ],
     1

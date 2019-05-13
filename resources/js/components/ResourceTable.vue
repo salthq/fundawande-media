@@ -67,7 +67,7 @@
             size="sm"
             variant="danger"
             class="action_button mr-1 my-1"
-            @click="deleteResource(data.item.id)"
+            @click="showDeletionModal(data.item.id, $event.target)"
           >
             <i class="far fa-trash-alt"></i>
           </b-button>
@@ -136,6 +136,14 @@
         ></b-pagination>
       </b-col>
     </b-row>
+
+    <!-- Deletion Confirmation Modal -->
+    <b-modal
+      :id="deletionModal.id"
+      :title="deletionModal.title"
+      @ok="deleteResource(deletionModal.item)"
+      @hide="resetDeletionModal()"
+    >{{ deletionModal.content }}</b-modal>
   </div>
 </template>
 
@@ -162,6 +170,12 @@ export default {
         { key: "size", label: "Size", sortable: false },
         { key: "actions", label: "Actions" }
       ],
+      deletionModal: {
+        id: "deletion-modal",
+        title: "Delete Resource Confirmation",
+        content: "Are you sure you want to delete this resource?",
+        item: ""
+      },
       editedTitle: "",
       _method: "PUT"
     };
@@ -171,6 +185,13 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    showDeletionModal(item, button) {
+      this.deletionModal.item = item;
+      this.$root.$emit("bv::show::modal", this.deletionModal.id, button);
+    },
+    resetDeletionModal() {
+      this.deletionModal.item = "";
     },
     deleteResource(id) {
       axios.post("/resources/" + id, { _method: "delete" }).then(response => {
