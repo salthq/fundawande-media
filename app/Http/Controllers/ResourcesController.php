@@ -44,7 +44,7 @@ class ResourcesController extends Controller
         $formatted_file = trim(str_replace(' ', '_', $file->getClientOriginalName()));
 
         $resource->title = $request->title[$request->index];
-        $resource->course_prefix = $request->course_prefix;
+        $resource->course_prefix = $request->course_prefix[$request->index];
         $resource->mime = $file->getMimeType();
         $resource->filename = $formatted_file;
         //TODO: Save the size in a human-readable format

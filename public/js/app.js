@@ -2002,6 +2002,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -2097,7 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
         _method: "PUT",
         title: this.editedTitle
       }).then(function (data) {
-        _this2.hideModal(id);
+        _this2.hideEditModal(id);
 
         var index = _this2.filtered_resources.findIndex(function (resource) {
           return resource.id === id;
@@ -2108,10 +2124,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (data) {});
     },
-    showModal: function showModal(id) {
+    showEditModal: function showEditModal(id) {
       this.$root.$emit("bv::show::modal", "modal-".concat(id));
     },
-    hideModal: function hideModal(id) {
+    hideEditModal: function hideEditModal(id) {
       this.$root.$emit("bv::hide::modal", "modal-".concat(id));
     }
   },
@@ -66234,7 +66250,7 @@ var render = function() {
                       "b-button",
                       {
                         staticClass: "action_button mr-1 my-1",
-                        attrs: { size: "sm", variant: "danger" },
+                        attrs: { id: "delete", size: "sm", variant: "danger" },
                         on: {
                           click: function($event) {
                             return _vm.showDeletionModal(
@@ -66253,6 +66269,7 @@ var render = function() {
                         staticClass:
                           "action_button btn btn-sm btn-info mr-1 my-1",
                         attrs: {
+                          id: "view",
                           target: "_blank",
                           href: "/storage/resources/" + data.item.filename
                         }
@@ -66264,7 +66281,7 @@ var render = function() {
                       "b-button",
                       {
                         staticClass: "action_button mr-1 my-1",
-                        attrs: { size: "sm", variant: "primary" },
+                        attrs: { id: "copy", size: "sm", variant: "primary" },
                         on: {
                           click: function($event) {
                             return _vm.copyFileName(data.item.id)
@@ -66278,10 +66295,10 @@ var render = function() {
                       "b-button",
                       {
                         staticClass: "action_button mr-1 my-1",
-                        attrs: { size: "sm", variant: "secondary" },
+                        attrs: { id: "edit", size: "sm", variant: "secondary" },
                         on: {
                           click: function($event) {
-                            return _vm.showModal(data.item.id)
+                            return _vm.showEditModal(data.item.id)
                           }
                         }
                       },
@@ -66437,7 +66454,17 @@ var render = function() {
           }
         },
         [_vm._v(_vm._s(_vm.deletionModal.content))]
-      )
+      ),
+      _vm._v(" "),
+      _c("b-tooltip", {
+        attrs: { target: "delete", title: "Delete resource" }
+      }),
+      _vm._v(" "),
+      _c("b-tooltip", { attrs: { target: "view", title: "View resource" } }),
+      _vm._v(" "),
+      _c("b-tooltip", { attrs: { target: "copy", title: "Copy resource" } }),
+      _vm._v(" "),
+      _c("b-tooltip", { attrs: { target: "edit", title: "Edit resource" } })
     ],
     1
   )
@@ -66547,7 +66574,7 @@ var render = function() {
                 staticClass: "form-control mb-3",
                 attrs: {
                   type: "text",
-                  name: "course_prefix",
+                  name: "course_prefix[]",
                   placeholder: "Enter course prefix here",
                   required: ""
                 }

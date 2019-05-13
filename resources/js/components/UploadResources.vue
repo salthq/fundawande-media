@@ -29,7 +29,7 @@
         <label for="course_prefix">Add Course Prefix</label>
         <input
           type="text"
-          name="course_prefix"
+          name="course_prefix[]"
           class="form-control mb-3"
           placeholder="Enter course prefix here"
           required

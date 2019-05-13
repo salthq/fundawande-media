@@ -64,6 +64,7 @@
 
         <template slot="actions" slot-scope="data">
           <b-button
+            id="delete"
             size="sm"
             variant="danger"
             class="action_button mr-1 my-1"
@@ -72,6 +73,7 @@
             <i class="far fa-trash-alt"></i>
           </b-button>
           <b-link
+            id="view"
             class="action_button btn btn-sm btn-info mr-1 my-1"
             target="_blank"
             :href="'/storage/resources/' + data.item.filename"
@@ -79,6 +81,7 @@
             <i class="fas fa-eye text-white"></i>
           </b-link>
           <b-button
+            id="copy"
             size="sm"
             variant="primary"
             class="action_button mr-1 my-1"
@@ -87,10 +90,11 @@
             <i class="far fa-copy"></i>
           </b-button>
           <b-button
+            id="edit"
             size="sm"
             variant="secondary"
             class="action_button mr-1 my-1"
-            @click="showModal(data.item.id)"
+            @click="showEditModal(data.item.id)"
           >
             <i class="fas fa-wrench text-white"></i>
           </b-button>
@@ -144,6 +148,18 @@
       @ok="deleteResource(deletionModal.item)"
       @hide="resetDeletionModal()"
     >{{ deletionModal.content }}</b-modal>
+
+    <!-- Delete Button Tooltip -->
+    <b-tooltip target="delete" title="Delete resource"></b-tooltip>
+
+    <!-- View Button Tooltip -->
+    <b-tooltip target="view" title="View resource"></b-tooltip>
+
+    <!-- Copy Button Tooltip -->
+    <b-tooltip target="copy" title="Copy resource"></b-tooltip>
+
+    <!-- Edit Button Tooltip -->
+    <b-tooltip target="edit" title="Edit resource"></b-tooltip>
   </div>
 </template>
 
@@ -218,7 +234,7 @@ export default {
       axios
         .post("/resources/" + id, { _method: "PUT", title: this.editedTitle })
         .then(data => {
-          this.hideModal(id);
+          this.hideEditModal(id);
 
           let index = this.filtered_resources.findIndex(resource => {
             return resource.id === id;
@@ -230,10 +246,10 @@ export default {
         })
         .catch(function(data) {});
     },
-    showModal(id) {
+    showEditModal(id) {
       this.$root.$emit("bv::show::modal", `modal-${id}`);
     },
-    hideModal(id) {
+    hideEditModal(id) {
       this.$root.$emit("bv::hide::modal", `modal-${id}`);
     }
   },
