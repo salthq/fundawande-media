@@ -1964,6 +1964,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["filtered_resources"],
   data: function data() {
@@ -1973,20 +2003,29 @@ __webpack_require__.r(__webpack_exports__);
       filter: null,
       perPage: 10,
       pageOptions: [5, 10, 15, 20],
-      sortBy: "created_at",
+      sortBy: null,
       sortDesc: false,
+      sortDirection: "asc",
       items: [],
       fields: ["index", {
         key: "title",
+        label: "Title",
+        sortable: true
+      }, {
+        key: "course_prefix",
+        label: "Course Prefix",
         sortable: true
       }, {
         key: "type",
+        label: "Type",
         sortable: true
       }, {
         key: "date",
+        label: "Date",
         sortable: true
       }, {
         key: "size",
+        label: "Size",
         sortable: false
       }, {
         key: "actions",
@@ -2062,7 +2101,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     sortOptions: function sortOptions() {
       // Create an options list from our fields
-      return this.items.filter(function (f) {
+      return this.fields.filter(function (f) {
         return f.sortable;
       }).map(function (f) {
         return {
@@ -2088,6 +2127,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65909,58 +65956,46 @@ var render = function() {
         [
           _c(
             "b-row",
-            { staticClass: "justify-content-center justify-content-md-end" },
             [
               _c(
-                "b-card",
-                {
-                  staticClass:
-                    "py-2 mr-md-3 d-flex justify-content-center justify-content-md-end",
-                  attrs: { "no-body": "" }
-                },
+                "b-col",
+                { staticClass: "my-1", attrs: { md: "6" } },
                 [
                   _c(
-                    "b-col",
-                    { attrs: { md: "12" } },
+                    "b-form-group",
+                    {
+                      staticClass: "mb-0",
+                      attrs: { "label-cols-sm": "3", label: "Filter" }
+                    },
                     [
                       _c(
-                        "b-form-group",
-                        {
-                          staticClass: "mb-0",
-                          attrs: { "label-cols-sm": "3", label: "Filter" }
-                        },
+                        "b-input-group",
                         [
+                          _c("b-form-input", {
+                            attrs: { placeholder: "Type to Search" },
+                            model: {
+                              value: _vm.filter,
+                              callback: function($$v) {
+                                _vm.filter = $$v
+                              },
+                              expression: "filter"
+                            }
+                          }),
+                          _vm._v(" "),
                           _c(
-                            "b-input-group",
+                            "b-input-group-append",
                             [
-                              _c("b-form-input", {
-                                attrs: { placeholder: "Type to Search" },
-                                model: {
-                                  value: _vm.filter,
-                                  callback: function($$v) {
-                                    _vm.filter = $$v
-                                  },
-                                  expression: "filter"
-                                }
-                              }),
-                              _vm._v(" "),
                               _c(
-                                "b-input-group-append",
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      attrs: { disabled: !_vm.filter },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.filter = ""
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Clear")]
-                                  )
-                                ],
-                                1
+                                "b-button",
+                                {
+                                  attrs: { disabled: !_vm.filter },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.filter = ""
+                                    }
+                                  }
+                                },
+                                [_vm._v("Clear")]
                               )
                             ],
                             1
@@ -65968,6 +66003,157 @@ var render = function() {
                         ],
                         1
                       )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { md: "6" } },
+                [
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "mb-0",
+                      attrs: { "label-cols-sm": "3", label: "Sort" }
+                    },
+                    [
+                      _c(
+                        "b-input-group",
+                        [
+                          _c(
+                            "b-form-select",
+                            {
+                              attrs: { options: _vm.sortOptions },
+                              model: {
+                                value: _vm.sortBy,
+                                callback: function($$v) {
+                                  _vm.sortBy = $$v
+                                },
+                                expression: "sortBy"
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: { slot: "first" },
+                                  domProps: { value: null },
+                                  slot: "first"
+                                },
+                                [_vm._v("-- none --")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-select",
+                            {
+                              attrs: { slot: "append", disabled: !_vm.sortBy },
+                              slot: "append",
+                              model: {
+                                value: _vm.sortDesc,
+                                callback: function($$v) {
+                                  _vm.sortDesc = $$v
+                                },
+                                expression: "sortDesc"
+                              }
+                            },
+                            [
+                              _c("option", { domProps: { value: false } }, [
+                                _vm._v("Asc")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { domProps: { value: true } }, [
+                                _vm._v("Desc")
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { md: "6" } },
+                [
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "mb-0",
+                      attrs: { "label-cols-sm": "3", label: "Sort direction" }
+                    },
+                    [
+                      _c(
+                        "b-input-group",
+                        [
+                          _c(
+                            "b-form-select",
+                            {
+                              attrs: { slot: "append" },
+                              slot: "append",
+                              model: {
+                                value: _vm.sortDirection,
+                                callback: function($$v) {
+                                  _vm.sortDirection = $$v
+                                },
+                                expression: "sortDirection"
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "asc" } }, [
+                                _vm._v("Asc")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "desc" } }, [
+                                _vm._v("Desc")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "last" } }, [
+                                _vm._v("Last")
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-col",
+                { staticClass: "my-1", attrs: { md: "6" } },
+                [
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "mb-0",
+                      attrs: { "label-cols-sm": "3", label: "Per page" }
+                    },
+                    [
+                      _c("b-form-select", {
+                        attrs: { options: _vm.pageOptions },
+                        model: {
+                          value: _vm.perPage,
+                          callback: function($$v) {
+                            _vm.perPage = $$v
+                          },
+                          expression: "perPage"
+                        }
+                      })
                     ],
                     1
                   )
@@ -66310,6 +66496,20 @@ var render = function() {
                     }
                     _vm.$set(resource, "name", $event.target.value)
                   }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "course_prefix" } }, [
+                _vm._v("Add Course Prefix")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control mb-3",
+                attrs: {
+                  type: "text",
+                  name: "course_prefix",
+                  placeholder: "Enter course prefix here",
+                  required: ""
                 }
               }),
               _vm._v(" "),

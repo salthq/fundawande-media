@@ -14,7 +14,7 @@
                             <resource-list :full_resources="{{ $resources }} ">
                             </resource-list>
                         @else
-                            You have no resources yet!
+                            <p class="m-3">You have no resources yet!</p>
                         @endif
                     </div>
                 </div>

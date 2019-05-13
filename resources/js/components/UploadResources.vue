@@ -26,6 +26,14 @@
           required
           v-model="resource.name"
         >
+        <label for="course_prefix">Add Course Prefix</label>
+        <input
+          type="text"
+          name="course_prefix"
+          class="form-control mb-3"
+          placeholder="Enter course prefix here"
+          required
+        >
         <p>
           <b>File name:</b>
           {{ resource.name }}

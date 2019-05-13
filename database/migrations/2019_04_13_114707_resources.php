@@ -19,6 +19,7 @@ class Resources extends Migration
             $table->string('mime');
             $table->integer('size');
             $table->string('title');
+            $table->string('course_prefix');
             $table->timestamps();
         });
     }
