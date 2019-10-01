@@ -9,3 +9,13 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.bash_history
+.bash_logout
+.bashrc
+.cache/
+.composer/
+.gitconfig
+.profile
+.ssh/
+.viminfo
+logs/
