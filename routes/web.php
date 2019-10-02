@@ -19,7 +19,7 @@ Route::get('/home', function () {
     return view('welcome');
 })->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 // Resource Routes
 Route::resource('/resources', 'ResourcesController')->middleware('auth');
