@@ -58,15 +58,11 @@ class ResourcesController extends Controller
         return redirect('/resources');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Resource  $resource
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Resource $resource)
+    public function show()
     {
-        //
+        $resources = resource::all();
+
+        return response()->json($resources);
     }
 
     /**
