@@ -2227,6 +2227,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -33809,7 +33822,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-35e2db89] {\n  opacity: 0;\n  width: 100%;\n  height: 200px;\n  position: absolute;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89] {\n  outline: 2px dashed grey;\n  outline-offset: -10px;\n  background: #ccc;\n  color: dimgray;\n  padding: 10px 10px;\n  min-height: 200px;\n  position: relative;\n  cursor: pointer;\n}\n.filezone[data-v-35e2db89]:hover {\n  background: #c0c0c0;\n}\n.filezone p[data-v-35e2db89] {\n  font-size: 1.2em;\n  text-align: center;\n  padding: 50px;\n}\ndiv.resource-listing[data-v-35e2db89] {\n  border-bottom: 1px solid #ddd;\n}\n.remove-resource[data-v-35e2db89] {\n  cursor: pointer;\n}\na.submit-button[data-v-35e2db89] {\n  cursor: pointer;\n  display: block;\n  margin: auto;\n  text-align: center;\n  width: 200px;\n  padding: 10px;\n  text-transform: uppercase;\n  background-color: #ccc;\n  color: #fff !important;\n  font-weight: bold;\n  margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-35e2db89] {\n    opacity: 0;\n    width: 100%;\n    height: 200px;\n    position: absolute;\n    cursor: pointer;\n}\n.filezone[data-v-35e2db89] {\n    outline: 2px dashed grey;\n    outline-offset: -10px;\n    background: #ccc;\n    color: dimgray;\n    padding: 10px 10px;\n    min-height: 200px;\n    position: relative;\n    cursor: pointer;\n}\n.filezone[data-v-35e2db89]:hover {\n    background: #c0c0c0;\n}\n.filezone p[data-v-35e2db89] {\n    font-size: 1.2em;\n    text-align: center;\n    padding: 50px;\n}\ndiv.resource-listing[data-v-35e2db89] {\n    border-bottom: 1px solid #ddd;\n}\n.remove-resource[data-v-35e2db89] {\n    cursor: pointer;\n}\na.submit-button[data-v-35e2db89] {\n    cursor: pointer;\n    display: block;\n    margin: auto;\n    text-align: center;\n    width: 200px;\n    padding: 10px;\n    text-transform: uppercase;\n    background-color: #ccc;\n    color: #fff !important;\n    font-weight: bold;\n    margin-top: 20px;\n}\n", ""]);
 
 // exports
 
@@ -66567,7 +66580,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("label", { attrs: { for: "course_prefix" } }, [
-                _vm._v("Add Course Prefix")
+                _vm._v("Add Course Name")
               ]),
               _vm._v(" "),
               _c("input", {
@@ -66575,14 +66588,18 @@ var render = function() {
                 attrs: {
                   type: "text",
                   name: "course_prefix[]",
-                  placeholder: "Enter course prefix here",
+                  placeholder: "Enter the name of the course here",
                   required: ""
                 }
               }),
               _vm._v(" "),
               _c("p", [
                 _c("b", [_vm._v("File name:")]),
-                _vm._v("\n        " + _vm._s(resource.name) + "\n      ")
+                _vm._v(
+                  "\n                " +
+                    _vm._s(resource.name) +
+                    "\n            "
+                )
               ]),
               _vm._v(" "),
               _c(
@@ -66597,7 +66614,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "far fa-trash-alt" }),
-                  _vm._v(" Remove Resource\n      ")
+                  _vm._v(" Remove Resource\n            ")
                 ]
               )
             ]
@@ -66647,9 +66664,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _vm._v("\n      Drop your files here\n      "),
+      _vm._v("\n            Drop your files here\n            "),
       _c("br"),
-      _vm._v("or click to search\n    ")
+      _vm._v("or click to search\n        ")
     ])
   },
   function() {
@@ -66657,7 +66674,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "m-0" }, [
-      _vm._v("\n      Success!\n      "),
+      _vm._v("\n            Success!\n            "),
       _c("a", { staticClass: "alert-link", attrs: { href: "/resources" } }, [
         _vm._v("View resources?")
       ])
