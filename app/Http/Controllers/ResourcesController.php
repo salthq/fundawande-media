@@ -47,7 +47,6 @@ class ResourcesController extends Controller
         $resource->course_prefix = $request->course_prefix[$request->index];
         $resource->mime = $file->getMimeType();
         $resource->filename = $formatted_file;
-        //TODO: Save the size in a human-readable format
         $resource->size = $file->getClientSize();
 
         $resource->save();
