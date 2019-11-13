@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Storage;
 
 class Resource extends Model
 {
-    protected $fillable = ['filename', 'mime', 'size', 'title'];
+    protected $fillable = ['filename', 'mime', 'size', 'title', 'course_prefix'];
 }
