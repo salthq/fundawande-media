@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+Route::get('/', 'HomeController@index')->middleware('auth');
 
 Route::get('/home', function () {
     return view('welcome');

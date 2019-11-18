@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Fundawande;
+use App\Resource;
 use Illuminate\Http\Request;
+use App\Providers\StorageServiceProvider;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $storage_percentage = Fundawande::getTotalStorage();
+
+        return view(
+            'welcome',
+            [
+                'storage_percentage' => $storage_percentage,
+            ]
+        );
     }
 }

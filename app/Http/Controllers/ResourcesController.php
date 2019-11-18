@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Resource;
+use App\Helpers\Fundawande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +18,12 @@ class ResourcesController extends Controller
     public function index()
     {
         $resources = Resource::all();
-        return view('resources.index', compact('resources'));
+
+        $storage_percentage = Fundawande::getTotalStorage();
+        return view('resources.index', [
+            'resources' => $resources,
+            'storage_percentage' => $storage_percentage
+        ]);
     }
 
     /**
@@ -60,6 +66,7 @@ class ResourcesController extends Controller
     public function show()
     {
         $resources = resource::all();
+        
 
         return response()->json($resources);
     }
